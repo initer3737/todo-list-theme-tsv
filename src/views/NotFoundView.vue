@@ -2,15 +2,15 @@
 import anime1 from '@/assets/anime1.mp4'
 import anime2 from '@/assets/anime2.mp4'
 import anime3 from '@/assets/anime3.mp4'
-import Input from '@/components/atom/Input.vue';
-import { RouterLink } from 'vue-router'
+import {Debeh} from '@/stores/Debeh'
 </script>
 <script lang="ts">
   export default{
     data(){
       return {
        message:'not found 404!!!',
-       weejiosbg:[anime1,anime2,anime3]
+       weejiosbg:[anime1,anime2,anime3],
+       debeh:Debeh()
       }
     },
     computed:{
@@ -21,6 +21,9 @@ import { RouterLink } from 'vue-router'
           const randmize=Math.ceil(Math.random()*this.weejiosbg.length-1);
         return this.weejiosbg[randmize]
       },
+      getNameApp(){
+        return this.debeh.appName
+      }
     },
     methods:{
       
@@ -33,8 +36,20 @@ import { RouterLink } from 'vue-router'
     <button @click="$router.go(-1)">back</button>
   </div>
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
+  <div>
+    <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1>
+  </div>
 </template>
 <style scoped>
+.app-name{
+  position: absolute;
+  top:50px;
+  left:15px;
+  color: #fff;
+  font-size: 21px;
+  box-shadow: 1px 1px 12px 2px white;
+  animation: kelip-form 4s infinite alternate-reverse;
+}
 button{
     font-size: 21px;
     color: #fff;

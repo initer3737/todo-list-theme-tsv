@@ -6,6 +6,7 @@ import loading4 from '@/assets/loading4.mp4'
 import loading5 from '@/assets/loading5.mp4'
 import loading6 from '@/assets/loading6.mp4'
 import { useRouter,useRoute } from 'vue-router'
+import {Debeh} from '@/stores/Debeh'
 </script>
 <script lang="ts">
   export default{
@@ -15,6 +16,7 @@ import { useRouter,useRoute } from 'vue-router'
        weejiosbg:[loading1,loading2,loading3,loading4,loading5,loading6],
        route:useRouter(),
        param:useRoute(),
+       debeh:Debeh()
       }
     },
     computed:{
@@ -25,6 +27,9 @@ import { useRouter,useRoute } from 'vue-router'
           const randmize=Math.ceil(Math.random()*this.weejiosbg.length-1);
         return this.weejiosbg[randmize]
       },
+      getNameApp(){
+        return this.debeh.appName
+      }
     },
     mounted(){
       setTimeout(()=>{
@@ -41,11 +46,22 @@ import { useRouter,useRoute } from 'vue-router'
 <template>
   <div class="text-container">
     <h1>{{ message }}</h1>
-    
   </div>
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
+  <div>
+    <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1>
+  </div>
 </template>
 <style scoped>
+.app-name{
+  position: absolute;
+  top:50px;
+  left:15px;
+  color: #fff;
+  font-size: 21px;
+  box-shadow: 1px 1px 12px 2px white;
+  animation: kelip-form 4s infinite alternate-reverse;
+}
 button{
     font-size: 21px;
     color: #fff;
