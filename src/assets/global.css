@@ -1,0 +1,52 @@
+input{
+    border: 0;
+    font-size: 16px;
+    color:#fff;
+    padding: 3px 2px;
+    background: transparent;
+    border-bottom: 2px solid blue;
+}
+input::placeholder{
+    color: #fff;
+    font-size: 21px;
+}
+input:focus{
+    outline: none;
+    border-bottom: 2px solid white;
+    transition: ease 2s;
+}
+.bg-weejio{
+    width: 100%;
+    min-height: 100vh;
+    inset: 0;
+    object-fit: cover;
+    object-position: center;
+}
+label{
+  font-size: 16px;
+  padding-left: 3px;
+  text-decoration: underline;
+}
+
+button{
+    font-size: 21px;
+    color: #fff;
+    border-bottom: 2px solid rgba(255,255,255,.4);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-width: 2px;
+    border-radius: 2px;
+    transition: all .5s;
+}
+button:hover{
+    font-size: 21px;
+    color: rgba(161, 231, 240, 0.9);
+    /* border: 2px solid blue; */
+    border-bottom: 2px solid rgba(255,255,255,.9);
+    border-left: 2px solid rgba(255,255,255,.9);
+    border-right: 2px solid rgba(255,255,255,.9);
+    border-width: 2px;
+    border-radius: 2px;
+    transition: all .5s;
+}
