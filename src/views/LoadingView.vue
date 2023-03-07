@@ -1,16 +1,20 @@
 <script setup lang="ts">
-import anime1 from '@/assets/anime1.mp4'
-import anime2 from '@/assets/anime2.mp4'
-import anime3 from '@/assets/anime3.mp4'
-import Input from '@/components/atom/Input.vue';
-import { RouterLink } from 'vue-router'
+import loading1 from '@/assets/loading1.mp4'
+import loading2 from '@/assets/loading2.mp4'
+import loading3 from '@/assets/loading3.mp4'
+import loading4 from '@/assets/loading4.mp4'
+import loading5 from '@/assets/loading5.mp4'
+import loading6 from '@/assets/loading6.mp4'
+import { useRouter,useRoute } from 'vue-router'
 </script>
 <script lang="ts">
   export default{
     data(){
       return {
-       message:'not found 404!!!',
-       weejiosbg:[anime1,anime2,anime3]
+       message:'loading...',
+       weejiosbg:[loading1,loading2,loading3,loading4,loading5,loading6],
+       route:useRouter(),
+       param:useRoute(),
       }
     },
     computed:{
@@ -22,15 +26,22 @@ import { RouterLink } from 'vue-router'
         return this.weejiosbg[randmize]
       },
     },
-    methods:{
-      
+    mounted(){
+      setTimeout(()=>{
+          const param=this.param.params.url
+          if(param == 'login'){
+            this.route.push(`/`)
+          }else{
+            this.route.push(`/${param}`)
+          }
+      },5000)
     }
   }
 </script>
 <template>
   <div class="text-container">
     <h1>{{ message }}</h1>
-    <button @click="$router.go(-1)">back</button>
+    
   </div>
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
 </template>

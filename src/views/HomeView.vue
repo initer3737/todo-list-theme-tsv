@@ -39,7 +39,7 @@ import { RouterLink } from 'vue-router'
           <RouterLink :to="'/register'" class="text-white hover:text-[blue] ease-in duration-500 underline">
             register
           </RouterLink>
-          <RouterLink :to="'/reset'" class="text-white hover:text-[blue] ease-in duration-500 underline">
+          <RouterLink :to="'/loading/reset'" class="text-white hover:text-[blue] ease-in duration-500 underline">
             reset
           </RouterLink>
         </div>

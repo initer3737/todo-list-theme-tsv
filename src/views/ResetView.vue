@@ -36,7 +36,7 @@ import { RouterLink } from 'vue-router'
         <Input  :onChange="onChange" :placeholder="'password'" :id="'password'" label="password" type="password"/>
         <button @click="">reset</button>
         <div class="flex gap-3 justify-start">
-          <RouterLink :to="'/'" class="text-white hover:text-[blue] ease-in duration-500 underline">
+          <RouterLink :to="'/loading/login'" class="text-white hover:text-[blue] ease-in duration-500 underline">
             login
           </RouterLink>
         </div>
