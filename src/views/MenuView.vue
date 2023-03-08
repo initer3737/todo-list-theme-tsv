@@ -3,6 +3,7 @@ import anime1 from '@/assets/anime1.mp4'
 import anime2 from '@/assets/anime2.mp4'
 import anime3 from '@/assets/anime3.mp4'
 import {Debeh} from '@/stores/Debeh'
+import { RouterLink } from 'vue-router'
 </script>
 <script lang="ts">
   export default{
@@ -31,23 +32,89 @@ import {Debeh} from '@/stores/Debeh'
   }
 </script>
 <template>
-  <div class="text-container">
-    <h1>{{ message }}</h1>
+  <div class="menu-container">
+      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">
+            user info
+      </RouterLink>
+      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">
+            credit lists
+      </RouterLink>
+      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500">
+            play
+      </RouterLink>
+      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-l-[2px] border-[#000]">
+            galeries
+      </RouterLink>
+      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
+            lobby
+      </RouterLink>
+      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
+            settings
+      </RouterLink>
+      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
+            logout
+      </RouterLink>
   </div>
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
   <div>
     <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1>
   </div>
+  <div class="top3-container">
+      <h1>top 3 kombatans</h1>
+    <ol class="list-none">
+      <li>1.yotsusan machi</li>
+      <li>2.initer3737</li>
+      <li>3.yotsuba nakano</li>
+    </ol>
+  </div>
 </template>
 <style scoped>
+.top3-container{
+  padding: 15px;
+  position: absolute;
+  top: 20%;
+  right: 20px;
+  /* backdrop-filter: blur(10px); */
+  color: #fff;
+  font-size: 21px;
+  background:linear-gradient(45deg,rgba(0, 0, 0,1) 10%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
+  animation: 1s infinite alternate top3;
+  animation-play-state: paused;
+  cursor: default;
+  border-radius: 6px;
+}
+@keyframes top3 {
+  from{}
+  50%{
+    background:linear-gradient(45deg,rgba(0, 0, 0,1) 50%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
+  }
+  60%{
+    background:linear-gradient(45deg,rgba(0, 0, 0,1) 40%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
+  }
+  70%{
+    background:linear-gradient(45deg,rgba(0, 0, 0,1) 30%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
+  }
+  80%{
+    background:linear-gradient(45deg,rgba(0, 0, 0,1) 20%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
+  }
+  to{
+    background:linear-gradient(45deg,rgba(0, 0, 0,1) 0%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
+  }
+}
 .app-name{
   position: absolute;
-  top:50px;
+  top:70px;
   left:15px;
   color: #fff;
   font-size: 21px;
   box-shadow: 1px 1px 12px 2px white;
   animation: kelip-form 4s infinite alternate-reverse;
+}
+@keyframes kelip-form {
+  from{}
+  to{
+    box-shadow: 1px 1px 12px 2px dodgerblue;
+  }
 }
 button{
     font-size: 21px;
@@ -57,16 +124,25 @@ button{
 button:hover{
     font-size: 21px;
 }
-.text-container{
+.menu-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
   z-index: 99;
-  background:linear-gradient(45deg,rgba(0, 0, 255,.5),rgba(128, 0, 128,.5)) ;
+  background:linear-gradient(20deg,rgba(0, 0, 0,1) 20%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
+  /* background: rgba(0, 0, 0, .2); */
+  /* filter: brightness(105%); */
+  /* backdrop-filter: blur(10px); */
   position: absolute;
-  top: 50vh;
-  left: 50vw;
+  top: 0;
   font-size: 25px;
-  padding: 15px;
-  box-shadow: 1px 1px 12px 6px whitesmoke;
-  animation: kelip-not-found infinite 4s alternate;
+  padding: 5px 35px;
+  text-transform: capitalize;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+.menu-container a{
+  /* border-left: 2px solid black; */
+  padding: 0 23px;
 }
 @keyframes kelip-not-found {
   from{}

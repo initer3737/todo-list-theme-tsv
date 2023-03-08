@@ -76,6 +76,12 @@ import {Debeh} from '@/stores/Debeh'
   box-shadow: 1px 1px 12px 2px white;
   animation: kelip-form 4s infinite alternate-reverse;
 }
+@keyframes kelip-form {
+  from{}
+  to{
+    box-shadow: 1px 1px 12px 2px dodgerblue;
+  }
+}
 .forms-data{
   position: absolute;
   top: 15%;
