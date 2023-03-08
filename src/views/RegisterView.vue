@@ -10,7 +10,11 @@ import {Debeh} from '@/stores/Debeh'
       return {
         formdata:{
           username:'',
-          password:''
+          email:'',
+          country:'',
+          gender:'',
+          password:'',
+          password_confirm:''
         },
         debeh:Debeh()
       }
@@ -30,6 +34,10 @@ import {Debeh} from '@/stores/Debeh'
       onChange(e: Event){
           const target=(<HTMLInputElement>e.target)
             this.formdata={...this.formdata,[target.id]:target.value}
+      },
+      onchangeSelect(e: Event){
+          const target=(<HTMLSelectElement>e.target)
+            this.formdata={...this.formdata,[target.id]:target.selectedOptions[0].value}
       }
     }
   }
@@ -41,7 +49,15 @@ import {Debeh} from '@/stores/Debeh'
   </div>
     <div class="forms-data bg-[dodgerblue]/50 p-3 rounded">
         <Input  :onChange="onChange" :placeholder="'username'" :id="'username'" label="username"/>
+        <Input  :onChange="onChange" :placeholder="'email'" :id="'email'" label="email"/>
+        <Input  :onChange="onChange" :placeholder="'country'" :id="'country'" label="country"/>
         <Input  :onChange="onChange" :placeholder="'password'" :id="'password'" label="password" type="password"/>
+        <Input  :onChange="onChange" :placeholder="'password confirm'" :id="'password_confirm'" label="password_confirm" type="password confirm"/>
+        <select name="" id="gender" :onchange="onchangeSelect" class="my-[9px]">
+            <option value="" selected>gender</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+        </select>
         <button @click="">register</button>
         <div class="flex gap-3 justify-start">
           <RouterLink :to="'/loading/login'" class="text-white hover:text-[blue] ease-in duration-500 underline">
@@ -62,7 +78,7 @@ import {Debeh} from '@/stores/Debeh'
 }
 .forms-data{
   position: absolute;
-  top: 40%;
+  top: 15%;
   right: 23px;
   gap: 5px;
   display: flex;

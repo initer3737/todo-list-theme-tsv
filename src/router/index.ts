@@ -15,6 +15,9 @@ const router = createRouter({
       path: '/register',name: 'register',component:()=>import('../views/RegisterView.vue'),meta:{title:'register'}
     },
     {
+      path: '/menu',name: 'menu',component:()=>import('../views/MenuView.vue'),meta:{title:'menu'}
+    },
+    {
       path: '/loading/:url',name: 'loading',component:()=>import('../views/LoadingView.vue'),meta:{title:'loading'}
     },
     {

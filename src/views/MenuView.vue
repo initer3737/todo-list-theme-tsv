@@ -1,21 +1,15 @@
 <script setup lang="ts">
-import loading1 from '@/assets/loading1.mp4'
-import loading2 from '@/assets/loading2.mp4'
-import loading3 from '@/assets/loading3.mp4'
-import loading4 from '@/assets/loading4.mp4'
-import loading5 from '@/assets/loading5.mp4'
-import loading6 from '@/assets/loading6.mp4'
-import { useRouter,useRoute } from 'vue-router'
+import anime1 from '@/assets/anime1.mp4'
+import anime2 from '@/assets/anime2.mp4'
+import anime3 from '@/assets/anime3.mp4'
 import {Debeh} from '@/stores/Debeh'
 </script>
 <script lang="ts">
   export default{
     data(){
       return {
-       message:'loading...',
-       weejiosbg:[loading1,loading2,loading3,loading4,loading5,loading6],
-       route:useRouter(),
-       param:useRoute(),
+       message:'menu ',
+       weejiosbg:[anime1,anime2,anime3],
        debeh:Debeh()
       }
     },
@@ -31,15 +25,8 @@ import {Debeh} from '@/stores/Debeh'
         return this.debeh.appName
       }
     },
-    mounted(){
-      setTimeout(()=>{
-          const param=this.param.params.url
-          if(param == 'login'){
-            this.route.push(`/`)
-          }else{
-            this.route.push(`/${param}`)
-          }
-      },9000)
+    methods:{
+      
     }
   }
 </script>

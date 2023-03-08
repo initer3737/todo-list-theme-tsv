@@ -39,6 +39,11 @@ import {Debeh} from '@/stores/Debeh'
   <div>
     <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1>
   </div>
+  <div class="link-container bg-[dodgerblue]/50 p-2 rounded">
+    <RouterLink :to="'/loading/menu'" class="text-white hover:text-[blue] ease-in duration-500 underline">
+      menuju game menu
+    </RouterLink>
+  </div>
     <div class="forms-data bg-[dodgerblue]/50 p-3 rounded">
         <Input  :onChange="onChange" :placeholder="'username'" :id="'username'" label="username"/>
         <Input  :onChange="onChange" :placeholder="'password'" :id="'password'" label="password" type="password"/>
@@ -54,6 +59,11 @@ import {Debeh} from '@/stores/Debeh'
     </div>
 </template>
 <style scoped>
+.link-container{
+  position: absolute;
+  top:20%;
+  right: 50px;
+}
 .app-name{
   position: absolute;
   top:50px;

@@ -10,7 +10,8 @@ import {Debeh} from '@/stores/Debeh'
       return {
         formdata:{
           username:'',
-          password:''
+          password:'',
+          password_confirm:''
         },
        debeh:Debeh()
       }
@@ -42,6 +43,7 @@ import {Debeh} from '@/stores/Debeh'
     <div class="forms-data bg-[dodgerblue]/50 p-3 rounded">
         <Input  :onChange="onChange" :placeholder="'username'" :id="'username'" label="username"/>
         <Input  :onChange="onChange" :placeholder="'password'" :id="'password'" label="password" type="password"/>
+        <Input  :onChange="onChange" :placeholder="'password confirm'" :id="'password_confirm'" label="password_confirm" type="password"/>
         <button @click="">reset</button>
         <div class="flex gap-3 justify-start">
           <RouterLink :to="'/loading/login'" class="text-white hover:text-[blue] ease-in duration-500 underline">
