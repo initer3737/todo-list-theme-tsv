@@ -3,6 +3,7 @@ import anime1 from '@/assets/anime1.mp4'
 import anime2 from '@/assets/anime2.mp4'
 import anime3 from '@/assets/anime3.mp4'
 import {Debeh} from '@/stores/Debeh'
+import Icon from '@/components/atom/Icon.vue'
 import { RouterLink } from 'vue-router'
 </script>
 <script lang="ts">
@@ -52,7 +53,7 @@ import { RouterLink } from 'vue-router'
             settings
       </RouterLink>
       <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
-            logout
+        <Icon :color="'[white]'" :icon="'power'"/>
       </RouterLink>
   </div>
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
@@ -76,30 +77,12 @@ import { RouterLink } from 'vue-router'
   right: 20px;
   /* backdrop-filter: blur(10px); */
   color: #fff;
+  box-shadow: 1px 1px 12px 2px white;
   font-size: 21px;
   background:linear-gradient(45deg,rgba(0, 0, 0,1) 10%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
-  animation: 1s infinite alternate top3;
-  animation-play-state: paused;
+  animation: kelip-form 1s infinite alternate;
   cursor: default;
   border-radius: 6px;
-}
-@keyframes top3 {
-  from{}
-  50%{
-    background:linear-gradient(45deg,rgba(0, 0, 0,1) 50%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
-  }
-  60%{
-    background:linear-gradient(45deg,rgba(0, 0, 0,1) 40%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
-  }
-  70%{
-    background:linear-gradient(45deg,rgba(0, 0, 0,1) 30%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
-  }
-  80%{
-    background:linear-gradient(45deg,rgba(0, 0, 0,1) 20%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
-  }
-  to{
-    background:linear-gradient(45deg,rgba(0, 0, 0,1) 0%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
-  }
 }
 .app-name{
   position: absolute;
