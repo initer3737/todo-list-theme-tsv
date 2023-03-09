@@ -34,7 +34,7 @@ import { RouterLink } from 'vue-router'
 </script>
 <template>
   <div class="menu-container">
-      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">
+      <RouterLink :to="'/loading/user&yotsusan machi'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">
             user info
       </RouterLink>
       <RouterLink :to="'/loading/kreditlist'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">

@@ -97,6 +97,11 @@ import { RouterLink } from 'vue-router'
               inspireshion ui
             </a>
           </li>
+          <li class="border-b-2">
+            <a :href="`https://youtu.be/4EDLVlJ66wM?list=PLnWJ9xIgeEsbU0f6AGfSMHt6hizVBdAQp`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
+              music themes
+            </a>
+          </li>
         </ol>
       </div>
   </div>
