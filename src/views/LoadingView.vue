@@ -37,7 +37,8 @@ import {Debeh} from '@/stores/Debeh'
           if(param == 'login'){
             this.route.push(`/`)
           }else{
-            this.route.push(`/${param}`)
+                const params=param.toString().replace('&','/')
+              this.route.push(`/${params}`)
           }
       },9000)
     }

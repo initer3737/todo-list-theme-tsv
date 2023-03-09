@@ -43,52 +43,52 @@ import { RouterLink } from 'vue-router'
         <h1 class="border-b-2 pl-[16px]">kombatans leaderboards</h1>
         <ol class="list-none flex flex-col gap-1">
           <li>name [score]</li>
-          <li class="border-b-2">
+          <li class="border-b-2 border-blue-400 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               1.yotsusan machi [1060]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               2.initer3737 [960]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               3.yotsuba nakano [860]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               4.miku nakano [760]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               5.yotsuba nakano [660]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               6.yotsuba nakano [560]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               7.yotsuba nakano [460]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               8.yotsuba nakano [360]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               9.yotsuba nakano [260]
             </RouterLink>
           </li>
-          <li class="border-b-2">
+          <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
             <RouterLink :to="`/user/what`">
               10.yotsuba nakano [160]
             </RouterLink>
@@ -101,11 +101,11 @@ import { RouterLink } from 'vue-router'
         <h1 class="border-b-2 pl-[16px]">kombatans</h1>
         <ol class="list-none">
           <li class="border-b-2 pl-5">
-            <Icon :color="'green-600 w-[25px]'" :icon="'circle-fill'"/>
+            <Icon :color="' text-green-600 w-[25px]'" :icon="'circle-fill'"/>
             230
           </li>
           <li class="border-b-2 pl-5">
-            <Icon :color="'rose-600 w-[25px]'" :icon="'circle-fill'"/>  450
+            <Icon :color="' text-rose-600 w-[25px]'" :icon="'circle-fill'"/>  450
           </li>
           <li class="border-b-2 pl-5">
             total : 680

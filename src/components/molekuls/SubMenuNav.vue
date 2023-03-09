@@ -10,7 +10,7 @@ import { RouterLink } from 'vue-router'
       <RouterLink :to="'/loading/galery'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
            <Icon :color="'[#fff]'" :icon="'images'"/>
       </RouterLink>
-      <RouterLink :to="'/loading/user/12'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
+      <RouterLink :to="'/loading/user&mama'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
            <Icon :color="'[#fff]'" :icon="'person-vcard'"/>
       </RouterLink>
       <RouterLink :to="'/loading/kreditlist'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
@@ -24,7 +24,7 @@ import { RouterLink } from 'vue-router'
 <style scoped>
 .menu-container{
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-flow:nowrap column;
   width: 100px;
   height: 125%;

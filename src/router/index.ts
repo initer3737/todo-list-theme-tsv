@@ -24,6 +24,9 @@ const router = createRouter({
       path: '/kreditlist',name: 'kreditlist',component:()=>import('../views/KreditlistView.vue'),meta:{title:'kredit lists'}
     },
     {
+      path: '/user/:username',name: 'user',component:()=>import('../views/UserInfoView.vue'),meta:{title:'user information'}
+    },
+    {
       path: '/galery',name: 'galery',component:()=>import('../views/GaleryView.vue'),meta:{title:'galeries'}
     },
     {

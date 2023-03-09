@@ -43,57 +43,57 @@ import { RouterLink } from 'vue-router'
         <h1 class="border-b-2 pl-[16px]">credit lists</h1>
         <ol class="list-decimal flex flex-col gap-1">
           <li class="border-b-2">
-            <a :href="`https://id.pinterest.com/puthutwahyuaji/project-todo-list-theme-tsv/`" target="_blank">
+            <a :href="`https://id.pinterest.com/puthutwahyuaji/project-todo-list-theme-tsv/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               images
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://wallpaperwaifu.com/anime/hk416-girls-frontline-snow-apocalypse-live-wallpaper/`" target="_blank">
+            <a :href="`https://wallpaperwaifu.com/anime/hk416-girls-frontline-snow-apocalypse-live-wallpaper/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               animeshion 1
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://moewalls.com/anime/ai-hayasaka-in-military-kaguya-sama-wa-kokurasetai-live-wallpaper/download/`" target="_blank">
+            <a :href="`https://moewalls.com/anime/ai-hayasaka-in-military-kaguya-sama-wa-kokurasetai-live-wallpaper/download/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               animeshion 2
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://moewalls.com/anime/anime-girl-military-live-wallpaper/download/`" target="_blank">
+            <a :href="`https://moewalls.com/anime/anime-girl-military-live-wallpaper/download/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               animeshion 3
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://moewalls.com/anime/squad-404-in-a-operation-girls-frontline-live-wallpaper/download/`" target="_blank">
+            <a :href="`https://moewalls.com/anime/squad-404-in-a-operation-girls-frontline-live-wallpaper/download/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               loading 1
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://moewalls.com/anime/ai-hayasaka-in-military-kaguya-sama-wa-kokurasetai-live-wallpaper/download/`" target="_blank">
+            <a :href="`https://moewalls.com/anime/ai-hayasaka-in-military-kaguya-sama-wa-kokurasetai-live-wallpaper/download/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               loading 2
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://moewalls.com/anime/squad-404-in-a-mission-girls-frontline-live-wallpaper/`" target="_blank">
+            <a :href="`https://moewalls.com/anime/squad-404-in-a-mission-girls-frontline-live-wallpaper/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               loading 3
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://moewalls.com/anime/st-ar-15-girls-frontline-live-wallpaper/download/`" target="_blank">
+            <a :href="`https://moewalls.com/anime/st-ar-15-girls-frontline-live-wallpaper/download/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               loading 4
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://moewalls.com/anime/m4-sopmod-ii-in-a-mission-girls-frontline-live-wallpaper/`" target="_blank">
+            <a :href="`https://moewalls.com/anime/m4-sopmod-ii-in-a-mission-girls-frontline-live-wallpaper/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               loading 5
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://moewalls.com/anime/ump-45-in-the-rain-girls-frontline-live-wallpaper/`" target="_blank">
+            <a :href="`https://moewalls.com/anime/ump-45-in-the-rain-girls-frontline-live-wallpaper/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               loading 6
             </a>
           </li>
           <li class="border-b-2">
-            <a :href="`https://www.rockpapershotgun.com/counter-strike-global-offensive-launches-panorama-ui`" target="_blank">
+            <a :href="`https://www.rockpapershotgun.com/counter-strike-global-offensive-launches-panorama-ui`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
               inspireshion ui
             </a>
           </li>

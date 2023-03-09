@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import anime1 from '@/assets/anime1.mp4'
-import anime2 from '@/assets/anime2.mp4'
 import anime3 from '@/assets/anime3.mp4'
 import image1 from '@/assets/image1.png'
 import image2 from '@/assets/image2.jpeg'
@@ -17,7 +16,6 @@ import Icon from '@/components/atom/Icon.vue'
 import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
 </script>
 <script lang="ts">
-let sliders=[anime1,anime2,anime3];
   export default{
     data(){
       return {
@@ -28,23 +26,6 @@ let sliders=[anime1,anime2,anime3];
        numberIndexweejio:0,
        numberIndeximage:0
       }
-    },
-    mounted(){
-      setInterval(()=>{
-              this.numberIndexweejio++
-              if(this.numberIndexweejio == sliders.length){
-                  this.numberIndexweejio=0
-              };
-        },4000);
-      setInterval(()=>{
-              this.numberIndeximage++
-              if(this.numberIndeximage == this.animehImages.length){
-                  this.numberIndeximage=0
-              };
-        },6000);
-    },
-    onUnmounted(){
-      
     },
     computed:{
       getNumberIndexSlider(){
@@ -72,19 +53,36 @@ let sliders=[anime1,anime2,anime3];
   <div>
     <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1>
   </div>
-  <div class="top3-container h-[650px]">
+  <div class="top3-container h-[670px]">
       <div class="content-container-lobby">
-        <h1 class="border-b-2 pl-[16px]">galeries</h1>
+        <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px]">user information</h1>
         <ol class="list-none flex flex-col gap-1">
-          <li class="border-b-2">
-            <video :src="sliders[getNumberIndexSlider]" class="ease-out duration-600 h-[440px]" autoplay loop></video>
+          <li class="border-b-2 p-5">
+            name : yotsu
+          </li>
+          <li class="border-b-2 p-5">
+            country : indonesia
+          </li>
+          <li class="border-b-2 p-5">
+            score : 25.000.000
+          </li>
+          <li class="border-b-2 p-5">
+            global rank : 1
+          </li>
+          <li class="border-b-2 p-5">
+            emblem : godong gedang
+          </li>
+          <li class="border-b-2 p-5">
+            status : {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,300)+'...' }}
           </li>
         </ol>
       </div>
   </div>
   <div class="slider-images-container ">
       <div class="user-status-containers">
-        <h1 class="border-b-2 pl-[16px] py-2">image collections</h1>
+        <h1 class="border-b-2 pl-[16px] py-2">
+          yotsusan machi | gender | online
+        </h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5 pb-2">
             <img :src="animehImages[getNumberIndexAnimehImage]" alt="image slider" srcset="" class="ease-out duration-600 object-center w-[350px] h-[350px]">
