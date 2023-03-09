@@ -24,7 +24,8 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
        animehImages:[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10],
        debeh:Debeh(),
        numberIndexweejio:0,
-       numberIndeximage:0
+       numberIndeximage:0,
+       tooltip:false
       }
     },
     computed:{
@@ -55,33 +56,47 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   </div>
   <div class="top3-container h-[670px]">
       <div class="content-container-lobby">
-        <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px]">user information</h1>
+        <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px]">
+          <Icon :icon="'info-circle-fill'" :color="'white'"/>
+          user information
+        </h1>
         <ol class="list-none flex flex-col gap-1">
           <li class="border-b-2 p-5">
-            name : yotsu
+            <Icon :icon="'person-bounding-box'" :color="'white'"/> yotsu
           </li>
           <li class="border-b-2 p-5">
-            country : indonesia
+            <Icon :icon="'flag-fill'" :color="'white'"/> indonesia
           </li>
           <li class="border-b-2 p-5">
-            score : 25.000.000
+            <Icon :icon="'fan'" :color="'white'"/> 25.000.000
           </li>
           <li class="border-b-2 p-5">
-            global rank : 1
+            <Icon :icon="'diagram-3'" :color="'white'"/> 1
           </li>
           <li class="border-b-2 p-5">
-            emblem : godong gedang
+            <Icon :icon="'award-fill'" :color="'white'"/> godong gedang
           </li>
           <li class="border-b-2 p-5">
-            status : {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,300)+'...' }}
+            <div class=" status-cut" @mouseenter="()=>{
+                tooltip=true
+            }"  
+            @mouseleave="()=>{
+                tooltip=false
+            }"
+            >
+            <Icon :icon="'pencil-square'" :color="'white'"/> {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,10)+'...hover me!' }}
+            </div>
           </li>
         </ol>
+
       </div>
   </div>
   <div class="slider-images-container ">
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">
-          yotsusan machi | gender | online
+          yotsusan machi |
+          <Icon :icon="'gender-male'" :color="'white'"/> |
+          <Icon :icon="'circle-fill'" :color="` text-green-600`"/> 
         </h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5 pb-2">
@@ -107,8 +122,26 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
         </ol>
       </div>
   </div>
+  <div :class="`user-status-uncut-container opacity-${tooltip == false?'0':'1'} w-[750px]` ">
+      <div class="user-status-containers">
+        <h1 class="border-b-2 pl-[16px] py-2">tooltip</h1>
+        <ol class="list-none flex flex-col gap-5 py-3">
+          <li class="border-b-2 pl-5">
+            voluptas corporis eligendi perspiciatis voluptatem sit maiores perferendis, nesciunt maxime itaque qui architecto enim doloremque praesentium reiciendis, incidunt commodi veniam sint unde repellat repellendus! Nobis quaerat, a totam consequatur laborum at esse sunt assumenda, quod officiis minima odit incidunt ad quos blanditiis sapiente laboriosam saepe voluptas explicabo 
+          </li>
+        </ol>
+      </div>
+  </div>
 </template>
 <style scoped>
+
+.status-cut{
+  z-index: 45;
+  opacity: 1;
+}
+/* .status-cut:hover {
+  opacity: 1;
+} */
 .slider-images-container{
   z-index: 2;
   /* display: grid;
@@ -127,6 +160,25 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   cursor: default;
   border-radius: 6px;
   border: 2px solid #fff;
+}
+.user-status-uncut-container{
+  backdrop-filter: brightness(20%);
+  z-index: 90;
+  /* display: grid;
+  grid-template-columns: repeat(1,1fr);
+  padding: 5px 15px; */
+  padding:15px 20px;
+  position: absolute;
+  top: 150px;
+  left: 250px;
+  color: #fff;
+  font-size: 21px;
+  /* background:linear-gradient(45deg,rgba(0, 0, 0,1) 10%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ; */
+  /* animation: kelip-form 1s infinite alternate; */
+  cursor: default;
+  border-radius: 6px;
+  border: 2px solid #fff;
+  transition: all 2s;
 }
 .user-status-container{
   z-index: 1;

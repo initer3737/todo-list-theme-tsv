@@ -7,6 +7,9 @@ import { RouterLink } from 'vue-router'
       <RouterLink :to="'/loading/menu'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
            <Icon :color="'[#fff]'" :icon="'arrow-90deg-left'"/>
       </RouterLink>
+      <RouterLink :to="'/loading/lobby'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
+           <Icon :color="'[#fff]'" :icon="'crop'"/>
+      </RouterLink>
       <RouterLink :to="'/loading/galery'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
            <Icon :color="'[#fff]'" :icon="'images'"/>
       </RouterLink>

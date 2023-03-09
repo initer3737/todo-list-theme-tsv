@@ -35,13 +35,13 @@ let sliders=[anime1,anime2,anime3];
               if(this.numberIndexweejio == sliders.length){
                   this.numberIndexweejio=0
               };
-        },4000);
+        },20000);
       setInterval(()=>{
               this.numberIndeximage++
               if(this.numberIndeximage == this.animehImages.length){
                   this.numberIndeximage=0
               };
-        },6000);
+        },5000);
     },
     onUnmounted(){
       
@@ -77,7 +77,7 @@ let sliders=[anime1,anime2,anime3];
         <h1 class="border-b-2 pl-[16px]">galeries</h1>
         <ol class="list-none flex flex-col gap-1">
           <li class="border-b-2">
-            <video :src="sliders[getNumberIndexSlider]" class="ease-out duration-600 h-[440px]" autoplay loop></video>
+            <video :src="sliders[getNumberIndexSlider]" class="transition-all duration-[2000] h-[440px]" autoplay loop></video>
           </li>
         </ol>
       </div>
@@ -87,7 +87,7 @@ let sliders=[anime1,anime2,anime3];
         <h1 class="border-b-2 pl-[16px] py-2">image collections</h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5 pb-2">
-            <img :src="animehImages[getNumberIndexAnimehImage]" alt="image slider" srcset="" class="ease-out duration-600 object-center w-[350px] h-[350px]">
+            <img :src="animehImages[getNumberIndexAnimehImage]" alt="image slider" srcset="" class="transition duration-[2000] object-center w-[350px] h-[350px]">
           </li>
         </ol>
       </div>
@@ -129,6 +129,7 @@ let sliders=[anime1,anime2,anime3];
   cursor: default;
   border-radius: 6px;
   border: 2px solid #fff;
+  transition: 2s all;
 }
 .user-status-container{
   z-index: 1;

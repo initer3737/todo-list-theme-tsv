@@ -42,55 +42,55 @@ import { RouterLink } from 'vue-router'
       <div class="content-container-lobby">
         <h1 class="border-b-2 pl-[16px]">kombatans leaderboards</h1>
         <ol class="list-none flex flex-col gap-1">
-          <li>name [score]</li>
+          <li>username [score]</li>
           <li class="border-b-2 border-blue-400 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
+            <RouterLink :to="`/loading/user&what`">
               1.yotsusan machi [1060]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
+            <RouterLink :to="`/loading/user&what`">
               2.initer3737 [960]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
-              3.yotsuba nakano [860]
+            <RouterLink :to="`/loading/user&what`">
+              3.ichika nakano [860]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
-              4.miku nakano [760]
+            <RouterLink :to="`/loading/user&what`">
+              4.yotsuba nakano [760]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
-              5.yotsuba nakano [660]
+            <RouterLink :to="`/loading/user&what`">
+              5.nino nakano [660]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
-              6.yotsuba nakano [560]
+            <RouterLink :to="`/loading/user&what`">
+              6.miku nakano [560]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
-              7.yotsuba nakano [460]
+            <RouterLink :to="`/loading/user&what`">
+              7.itsuki nakano [460]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
-              8.yotsuba nakano [360]
+            <RouterLink :to="`/loading/user&what`">
+              8.dustiness ford lalatina [360]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
-              9.yotsuba nakano [260]
+            <RouterLink :to="`/loading/user&what`">
+              9.megumin [260]
             </RouterLink>
           </li>
           <li class="border-b-2 hover:text-[dodgerblue] ease-in duration-500">
-            <RouterLink :to="`/user/what`">
-              10.yotsuba nakano [160]
+            <RouterLink :to="`/loading/user&what`">
+              10.yun yun [160]
             </RouterLink>
           </li>
         </ol>
