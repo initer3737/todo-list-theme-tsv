@@ -50,3 +50,6 @@ button:hover{
     border-radius: 2px;
     transition: all .5s;
 }
+.app-name{
+    cursor: default;
+}

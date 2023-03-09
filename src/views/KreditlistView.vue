@@ -40,75 +40,79 @@ import { RouterLink } from 'vue-router'
   </div>
   <div class="top3-container">
       <div class="content-container-lobby">
-        <h1 class="border-b-2 pl-[16px]">kombatans leaderboards</h1>
-        <ol class="list-none flex flex-col gap-1">
-          <li>name [score]</li>
+        <h1 class="border-b-2 pl-[16px]">credit lists</h1>
+        <ol class="list-decimal flex flex-col gap-1">
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              1.yotsusan machi [1060]
-            </RouterLink>
+            <a :href="`https://id.pinterest.com/puthutwahyuaji/project-todo-list-theme-tsv/`" target="_blank">
+              images
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              2.initer3737 [960]
-            </RouterLink>
+            <a :href="`https://wallpaperwaifu.com/anime/hk416-girls-frontline-snow-apocalypse-live-wallpaper/`" target="_blank">
+              animeshion 1
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              3.yotsuba nakano [860]
-            </RouterLink>
+            <a :href="`https://moewalls.com/anime/ai-hayasaka-in-military-kaguya-sama-wa-kokurasetai-live-wallpaper/download/`" target="_blank">
+              animeshion 2
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              4.miku nakano [760]
-            </RouterLink>
+            <a :href="`https://moewalls.com/anime/anime-girl-military-live-wallpaper/download/`" target="_blank">
+              animeshion 3
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              5.yotsuba nakano [660]
-            </RouterLink>
+            <a :href="`https://moewalls.com/anime/squad-404-in-a-operation-girls-frontline-live-wallpaper/download/`" target="_blank">
+              loading 1
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              6.yotsuba nakano [560]
-            </RouterLink>
+            <a :href="`https://moewalls.com/anime/ai-hayasaka-in-military-kaguya-sama-wa-kokurasetai-live-wallpaper/download/`" target="_blank">
+              loading 2
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              7.yotsuba nakano [460]
-            </RouterLink>
+            <a :href="`https://moewalls.com/anime/squad-404-in-a-mission-girls-frontline-live-wallpaper/`" target="_blank">
+              loading 3
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              8.yotsuba nakano [360]
-            </RouterLink>
+            <a :href="`https://moewalls.com/anime/st-ar-15-girls-frontline-live-wallpaper/download/`" target="_blank">
+              loading 4
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              9.yotsuba nakano [260]
-            </RouterLink>
+            <a :href="`https://moewalls.com/anime/m4-sopmod-ii-in-a-mission-girls-frontline-live-wallpaper/`" target="_blank">
+              loading 5
+            </a>
           </li>
           <li class="border-b-2">
-            <RouterLink :to="`/user/what`">
-              10.yotsuba nakano [160]
-            </RouterLink>
+            <a :href="`https://moewalls.com/anime/ump-45-in-the-rain-girls-frontline-live-wallpaper/`" target="_blank">
+              loading 6
+            </a>
+          </li>
+          <li class="border-b-2">
+            <a :href="`https://www.rockpapershotgun.com/counter-strike-global-offensive-launches-panorama-ui`" target="_blank">
+              inspireshion ui
+            </a>
           </li>
         </ol>
       </div>
   </div>
   <div class="user-status-container">
       <div class="user-status-containers">
-        <h1 class="border-b-2 pl-[16px]">kombatans</h1>
-        <ol class="list-none">
+        <h1 class="border-b-2 pl-[16px] py-2">message</h1>
+        <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5">
             <Icon :color="'green-600 w-[25px]'" :icon="'circle-fill'"/>
-            230
+            thanks for download this source code
           </li>
           <li class="border-b-2 pl-5">
-            <Icon :color="'rose-600 w-[25px]'" :icon="'circle-fill'"/>  450
+            <Icon :color="'rose-600 w-[25px]'" :icon="'circle-fill'"/>  happy learning
           </li>
           <li class="border-b-2 pl-5">
-            total : 680
+            i hope u can have a good day and have nice friends family
           </li>
         </ol>
       </div>
@@ -119,9 +123,9 @@ import { RouterLink } from 'vue-router'
   /* display: grid;
   grid-template-columns: repeat(1,1fr);
   padding: 5px 15px; */
-  padding: 20px;
+  padding:15px 20px;
   position: absolute;
-  top: 150px;
+  top: 450px;
   right: 20px;
   backdrop-filter: blur(50px);
   color: #fff;

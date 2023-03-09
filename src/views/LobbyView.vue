@@ -4,7 +4,7 @@ import anime2 from '@/assets/anime2.mp4'
 import anime3 from '@/assets/anime3.mp4'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
-import SubMenuNavVue from '@/components/molekuls/SubMenuNav.vue'
+import SubMenuNav from '@/components/molekuls/SubMenuNav.vue'
 import { RouterLink } from 'vue-router'
 </script>
 <script lang="ts">

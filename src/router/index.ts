@@ -24,6 +24,9 @@ const router = createRouter({
       path: '/kreditlist',name: 'kreditlist',component:()=>import('../views/KreditlistView.vue'),meta:{title:'kredit lists'}
     },
     {
+      path: '/galery',name: 'galery',component:()=>import('../views/GaleryView.vue'),meta:{title:'galeries'}
+    },
+    {
       path: '/loading/:url',name: 'loading',component:()=>import('../views/LoadingView.vue'),meta:{title:'loading'}
     },
     {

@@ -43,13 +43,13 @@ import { RouterLink } from 'vue-router'
       <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500">
             play
       </RouterLink>
-      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-l-[2px] border-[#000]">
+      <RouterLink :to="'/loading/galery'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-l-[2px] border-[#000]">
             galeries
       </RouterLink>
       <RouterLink :to="'/loading/lobby'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
             lobby
       </RouterLink>
-      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
+      <RouterLink :to="'/loading/setting'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
             settings
       </RouterLink>
      <div class="pl-5 border-solid border-l-[2px] border-[#000]">
