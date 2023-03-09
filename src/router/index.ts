@@ -18,6 +18,12 @@ const router = createRouter({
       path: '/menu',name: 'menu',component:()=>import('../views/MenuView.vue'),meta:{title:'menu'}
     },
     {
+      path: '/lobby',name: 'lobby',component:()=>import('../views/LobbyView.vue'),meta:{title:'lobby'}
+    },
+    {
+      path: '/kreditlist',name: 'kreditlist',component:()=>import('../views/KreditlistView.vue'),meta:{title:'kredit lists'}
+    },
+    {
       path: '/loading/:url',name: 'loading',component:()=>import('../views/LoadingView.vue'),meta:{title:'loading'}
     },
     {

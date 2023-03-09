@@ -37,7 +37,7 @@ import { RouterLink } from 'vue-router'
       <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">
             user info
       </RouterLink>
-      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">
+      <RouterLink :to="'/loading/kreditlist'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">
             credit lists
       </RouterLink>
       <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500">
@@ -46,15 +46,17 @@ import { RouterLink } from 'vue-router'
       <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-l-[2px] border-[#000]">
             galeries
       </RouterLink>
-      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
+      <RouterLink :to="'/loading/lobby'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
             lobby
       </RouterLink>
       <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
             settings
       </RouterLink>
-      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500 border-solid border-l-[2px] border-[#000]">
-        <Icon :color="'[white]'" :icon="'power'"/>
-      </RouterLink>
+     <div class="pl-5 border-solid border-l-[2px] border-[#000]">
+        <button class="text-white hover:text-[dodgerblue] ease-in duration-500">
+          <Icon :color="'[white]'" :icon="'power'"/>
+        </button>
+     </div>
   </div>
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
   <div>
