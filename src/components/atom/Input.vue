@@ -7,13 +7,14 @@ import type { Method } from '@babel/types';
             label:string,
             type?:string,
             value?:string,
+            Accept?:string,
             onChange?:any,
         };
     defineProps<props>()
 </script>
 <template>
     <label :for="label" class="text-white">{{label}}</label>
- <input :type="type" @change="onChange" :placeholder="placeholder" :id="id" :value="value"/>
+ <input :type="type" @change="onChange" :placeholder="placeholder" :id="id" :value="value" :accept="Accept"/>
 </template>
 <style scoped>
 </style>

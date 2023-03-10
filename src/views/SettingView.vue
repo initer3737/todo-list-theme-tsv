@@ -17,6 +17,9 @@ import Input from '@/components/atom/Input.vue'
 import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
 </script>
 <script lang="ts">
+let formdatas={
+    avatar:''
+}
   export default{
     data(){
       return {
@@ -28,6 +31,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
        numberIndeximage:0,
        tooltipUserStatus:false,
        tooltipUserInfo:false,
+       formdata:formdatas,
       }
     },
     mounted(){
@@ -49,7 +53,17 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
       }
     },
     methods:{
-       
+      getElement(el:string){
+          return document.getElementById(el)
+      },
+      modalAvatar(){
+        this.getElement('avatar')?.click()
+      },
+      readImage(e:Event){
+          const target=(<HTMLInputElement>e.currentTarget)
+            // this.formdatas.avatar=target.files[0]
+            this.formdata={...this.formdata,[target.id]:target.files![0]}
+      }
     }
   }
 </script>
@@ -95,8 +109,8 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
           <li class="border-b-2 p-2 flex items-center gap-3">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-row gap-3">
-            <select name="" id="gender" class="text-[#000] select">
-                <option value="">select</option>
+            <select name="" id="gender">
+                <option value="">gender</option>
                 <option value="male">male</option>
                 <option value="female">female</option>
             </select>
@@ -117,7 +131,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
           <li class="border-b-2 p-2 flex items-center gap-3 hidden">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-col">
-             <Input :label="'avatar'" :placeholder="'avatar'" :id="'avatar'" :type="'file'" />
+             <Input :label="'avatar'" :placeholder="'avatar'" :id="'avatar'" :type="'file'" :Accept="'image/*'" :onchange="readImage"/>
            </div>
           </li>
           <li class="border-b-2 p-2 flex justify-center items-center gap-3">
@@ -134,7 +148,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
         <h1 class="border-b-2 pl-[16px] py-2">
           yotsusan machi |
           <Icon :icon="'gender-male'" :color="'white'"/> |
-          <button>ganti gambar</button>
+          <button @click="modalAvatar()">ganti gambar <Icon v-show="formdatas.avatar.trim() != ''" :color="' text-pink-400'" :icon="'instagram'"/> </button>
         </h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5 pb-2">
@@ -204,16 +218,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   </div>
 </template>
 <style scoped>
-.select{
-  width:200px;
-  background: transparent;
-  border-bottom:2px solid blue;
-  color:#fff;
-}
 
-.select:focus{
-  outline: none;
-}
 .element-visible{
   z-index: 900 !important;
 }

@@ -62,3 +62,19 @@ button:hover{
     opacity: 0;
     z-index: -3400;
 }
+select{
+    width:200px;
+    background: transparent;
+    border-bottom:2px solid blue;
+    color:#fff;
+  }
+  option{
+    background:rgba(0,0,0,.9);
+    padding: 15px;
+    font-size: 21px;
+  }
+  select:focus{
+    outline: none;
+    border-bottom:2px solid white;
+    transition: ease 2s;
+  }
