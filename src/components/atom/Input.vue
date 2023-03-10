@@ -6,13 +6,14 @@ import type { Method } from '@babel/types';
             placeholder:string,
             label:string,
             type?:string,
+            value?:string,
             onChange?:any,
         };
     defineProps<props>()
 </script>
 <template>
     <label :for="label" class="text-white">{{label}}</label>
- <input :type="type" @change="onChange" :placeholder="placeholder" :id="id"/>
+ <input :type="type" @change="onChange" :placeholder="placeholder" :id="id" :value="value"/>
 </template>
 <style scoped>
 </style>

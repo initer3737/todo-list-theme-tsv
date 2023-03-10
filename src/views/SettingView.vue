@@ -13,6 +13,7 @@ import image9 from '@/assets/image9.jpeg'
 import image10 from '@/assets/image10.jpeg'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
+import Input from '@/components/atom/Input.vue'
 import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
 </script>
 <script lang="ts">
@@ -67,24 +68,61 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
           user setting
         </h1>
         <ol class="list-none flex flex-col gap-1">
-          <li class="border-b-2 p-5">
-            <Icon :icon="'person-bounding-box'" :color="'white'"/> yotsu
+          <li class="border-b-2 p-2 flex items-center gap-3">
+            <Icon :icon="'pencil-square person-bounding-box'" :color="'white'"/> 
+           <div class="flex flex-col">
+             <Input :label="'username'" :placeholder="'username'" :id="'username'"/>
+           </div>
           </li>
-          <li class="border-b-2 p-5">
-            <Icon :icon="'flag-fill'" :color="'white'"/> indonesia
+          <li class="border-b-2 p-2 flex items-center gap-3">
+            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
+           <div class="flex flex-col">
+             <Input :label="'name'" :placeholder="'name'" :id="'name'" />
+           </div>
           </li>
-          <li class="border-b-2 p-5">
-            <Icon :icon="'fan'" :color="'white'"/> 25.000.000
+          <li class="border-b-2 p-2 flex items-center gap-3">
+            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
+           <div class="flex flex-col">
+             <Input :label="'country'" :placeholder="'country'" :id="'country'" />
+           </div>
           </li>
-          <li class="border-b-2 p-5">
-            <Icon :icon="'diagram-3'" :color="'white'"/> 1
+          <li class="border-b-2 p-2 flex items-center gap-3">
+            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
+           <div class="flex flex-col">
+             <Input :label="'status'" :placeholder="'status'" :id="'status'" />
+           </div>
           </li>
-          <li class="border-b-2 p-5">
-            <Icon :icon="'award-fill'" :color="'white'"/> godong gedang
+          <li class="border-b-2 p-2 flex items-center gap-3">
+            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
+           <div class="flex flex-row gap-3">
+            <select name="" id="gender" class="text-[#000] select">
+                <option value="">select</option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+           </div>
           </li>
-          <li class="border-b-2 p-5">
-            <div class=" status-cut" >
-            <Icon :icon="'pencil-square'" :color="'white'"/> {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,10)+'...hover me!' }}
+          <li class="border-b-2 p-2 flex items-center gap-3">
+            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
+           <div class="flex flex-col">
+             <Input :label="'password'" :placeholder="'password'" :id="'password'" :type="'password'"/>
+           </div>
+          </li>
+          <li class="border-b-2 p-2 flex items-center gap-3">
+            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
+           <div class="flex flex-col">
+             <Input :label="'password_confirm'" :placeholder="'password confirm'" :id="'password_confirm'" :type="'password'" />
+           </div>
+          </li>
+          <li class="border-b-2 p-2 flex items-center gap-3 hidden">
+            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
+           <div class="flex flex-col">
+             <Input :label="'avatar'" :placeholder="'avatar'" :id="'avatar'" :type="'file'" />
+           </div>
+          </li>
+          <li class="border-b-2 p-2 flex justify-center items-center gap-3">
+            <div class="cursor-pointer">
+              <button>submit</button>
             </div>
           </li>
         </ol>
@@ -122,7 +160,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
         </ol>
       </div>
   </div>
-  <div :class="`user-status-uncut-container ${tooltipUserInfo === false?'opacity-undefine':'opacity-define'} w-[750px] ` ">
+  <div :class="`user-status-uncut-container ${tooltipUserInfo === false?'opacity-undefine user-info-untogled':'opacity-define user-info-togled'} w-[750px]` ">
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">user informasi</h1>
         <ol class="list-none flex flex-col gap-1">
@@ -154,7 +192,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
         </ol>
       </div>
   </div>
-  <div :class="`user-status-tooltip ${tooltipUserStatus === false?'opacity-undefine':'opacity-define'} w-[750px] ` ">
+  <div :class="`user-status-tooltip ${tooltipUserStatus === false?'opacity-undefine element-invisible':'opacity-define element-visible'} w-[750px] ` ">
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">status</h1>
         <ol class="list-none flex flex-col gap-5 py-3">
@@ -166,6 +204,36 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   </div>
 </template>
 <style scoped>
+.select{
+  width:200px;
+  background: transparent;
+  border-bottom:2px solid blue;
+  color:#fff;
+}
+
+.select:focus{
+  outline: none;
+}
+.element-visible{
+  z-index: 900 !important;
+}
+.element-invisible{
+  z-index: -900 !important;
+}
+
+.user-info-togled{
+  position: absolute;
+  top: 50px;
+  right: 150px;
+  z-index: 900 !important;
+}
+.user-info-untogled{
+  position: absolute;
+  top: -1550px;
+  right: 350px;
+  z-index: -900 !important;
+  overflow: hidden;
+}
 .user-status-tooltip{
   /* backdrop-filter: blur(30px); */
   z-index: 90;
@@ -220,9 +288,6 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   grid-template-columns: repeat(1,1fr);
   padding: 5px 15px; */
   padding:15px 20px;
-  position: absolute;
-  top: 150px;
-  left: 250px;
   color: #fff;
   font-size: 21px;
   /* background:linear-gradient(45deg,rgba(0, 0, 0,1) 10%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ; */
