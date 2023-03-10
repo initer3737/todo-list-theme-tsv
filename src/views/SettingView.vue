@@ -25,8 +25,12 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
        debeh:Debeh(),
        numberIndexweejio:0,
        numberIndeximage:0,
-       tooltip:false
+       tooltipUserStatus:false,
+       tooltipUserInfo:false,
       }
+    },
+    mounted(){
+      
     },
     computed:{
       getNumberIndexSlider(){
@@ -56,9 +60,11 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   </div>
   <div class="top3-container h-[670px]">
       <div class="content-container-lobby">
-        <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px]">
+        <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px] cursor-pointer" @click="()=>{
+                tooltipUserInfo=!tooltipUserInfo
+            }">
           <Icon :icon="'info-circle-fill'" :color="'white'"/>
-          user information
+          user setting
         </h1>
         <ol class="list-none flex flex-col gap-1">
           <li class="border-b-2 p-5">
@@ -77,13 +83,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
             <Icon :icon="'award-fill'" :color="'white'"/> godong gedang
           </li>
           <li class="border-b-2 p-5">
-            <div class=" status-cut" @mouseenter="()=>{
-                tooltip=true
-            }"  
-            @mouseleave="()=>{
-                tooltip=false
-            }"
-            >
+            <div class=" status-cut" >
             <Icon :icon="'pencil-square'" :color="'white'"/> {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,10)+'...hover me!' }}
             </div>
           </li>
@@ -96,7 +96,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
         <h1 class="border-b-2 pl-[16px] py-2">
           yotsusan machi |
           <Icon :icon="'gender-male'" :color="'white'"/> |
-          <Icon :icon="'circle-fill'" :color="` text-green-600`"/> 
+          <button>ganti gambar</button>
         </h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5 pb-2">
@@ -122,9 +122,41 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
         </ol>
       </div>
   </div>
-  <div :class="`user-status-uncut-container ${tooltip === false?'opacity-undefine':'opacity-define'} w-[750px] ` ">
+  <div :class="`user-status-uncut-container ${tooltipUserInfo === false?'opacity-undefine':'opacity-define'} w-[750px] ` ">
       <div class="user-status-containers">
-        <h1 class="border-b-2 pl-[16px] py-2">tooltip</h1>
+        <h1 class="border-b-2 pl-[16px] py-2">user informasi</h1>
+        <ol class="list-none flex flex-col gap-1">
+          <li class="border-b-2 p-5">
+            <Icon :icon="'person-bounding-box'" :color="'white'"/> yotsu
+          </li>
+          <li class="border-b-2 p-5">
+            <Icon :icon="'flag-fill'" :color="'white'"/> indonesia
+          </li>
+          <li class="border-b-2 p-5">
+            <Icon :icon="'fan'" :color="'white'"/> password
+          </li>
+          <li class="border-b-2 p-5">
+            <Icon :icon="'diagram-3'" :color="'white'"/> status
+          </li>
+          <li class="border-b-2 p-5">
+            <Icon :icon="'gender-male'" :color="'white'"/> male
+          </li>
+          <li class="border-b-2 p-5">
+            <div class=" status-cut" @mouseenter="()=>{
+              if(tooltipUserInfo ==  true)tooltipUserStatus=true
+            }"
+            @mouseleave="()=>{
+              tooltipUserStatus=false
+            }">
+            <Icon :icon="'pencil-square'" :color="'white'"/> {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,10)+'...hover me!' }}
+            </div>
+          </li>
+        </ol>
+      </div>
+  </div>
+  <div :class="`user-status-tooltip ${tooltipUserStatus === false?'opacity-undefine':'opacity-define'} w-[750px] ` ">
+      <div class="user-status-containers">
+        <h1 class="border-b-2 pl-[16px] py-2">status</h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5">
             voluptas corporis eligendi perspiciatis voluptatem sit maiores perferendis, nesciunt maxime itaque qui architecto enim doloremque praesentium reiciendis, incidunt commodi veniam sint unde repellat repellendus! Nobis quaerat, a totam consequatur laborum at esse sunt assumenda, quod officiis minima odit incidunt ad quos blanditiis sapiente laboriosam saepe voluptas explicabo 
@@ -134,6 +166,26 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   </div>
 </template>
 <style scoped>
+.user-status-tooltip{
+  /* backdrop-filter: blur(30px); */
+  z-index: 90;
+  /* display: grid;
+  grid-template-columns: repeat(1,1fr);
+  padding: 5px 15px; */
+  padding:15px 20px;
+  position: absolute;
+  top: 150px;
+  left: 250px;
+  color: #fff;
+  font-size: 21px;
+  background:linear-gradient(45deg,rgba(0, 0, 0,1) 10%,rgba(0, 81, 128, 0.8),rgba(0, 0, 0,1)) ;
+  animation: kelip-form 3s infinite alternate-reverse;
+  cursor: default;
+  border-radius: 6px;
+  border: 2px solid #fff;
+  transition: all 2s;
+  box-shadow: 1px 1px 6px 6px #fff;
+}
 
 .status-cut{
   z-index: 45;
