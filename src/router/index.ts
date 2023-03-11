@@ -27,6 +27,9 @@ const router = createRouter({
       path: '/user/:username',name: 'user',component:()=>import('../views/UserInfoView.vue'),meta:{title:'user information'}
     },
     {
+      path: '/play',name: 'play',component:()=>import('../views/PlayView.vue'),meta:{title:'gameplay'}
+    },
+    {
       path: '/setting',name: 'setting',component:()=>import('../views/SettingView.vue'),meta:{title:'user setting'}
     },
     {

@@ -40,7 +40,7 @@ import { RouterLink } from 'vue-router'
       <RouterLink :to="'/loading/kreditlist'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000]">
             credit lists
       </RouterLink>
-      <RouterLink :to="'/loading/register'" class="text-white hover:text-[dodgerblue] ease-in duration-500">
+      <RouterLink :to="'/loading/play'" class="text-white hover:text-[dodgerblue] ease-in duration-500">
             play
       </RouterLink>
       <RouterLink :to="'/loading/galery'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-l-[2px] border-[#000]">

@@ -124,7 +124,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   </div>
   <div :class="`user-status-uncut-container ${tooltip === false?'opacity-undefine':'opacity-define'} w-[750px] ` ">
       <div class="user-status-containers">
-        <h1 class="border-b-2 pl-[16px] py-2">tooltip</h1>
+        <h1 class="border-b-2 pl-[16px] py-2">status</h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5">
             voluptas corporis eligendi perspiciatis voluptatem sit maiores perferendis, nesciunt maxime itaque qui architecto enim doloremque praesentium reiciendis, incidunt commodi veniam sint unde repellat repellendus! Nobis quaerat, a totam consequatur laborum at esse sunt assumenda, quod officiis minima odit incidunt ad quos blanditiis sapiente laboriosam saepe voluptas explicabo 
