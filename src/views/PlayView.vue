@@ -70,12 +70,16 @@ let formdatas={
   }
 </script>
 <template>
-  <SubMenuNAv/>
+  <!-- <SubMenuNAv/> -->
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
+  <button @click="()=>{
+                tooltipUserInfo=!tooltipUserInfo
+            }" class="btn-pause hover:bg-[dodgerblue]/50">pause</button>
+ <div :class="`${tooltipUserInfo === true ?'pause-filter':'continue-filter'}`"></div>           
   <div>
-    <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1>
+    <!-- <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1> -->
   </div>
-  <div class="top3-container h-[670px]">
+  <div class="top3-container h-[670px] hidden">
       <div class="content-container-lobby">
         <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px] cursor-pointer" @click="()=>{
                 tooltipUserInfo=!tooltipUserInfo
@@ -145,7 +149,7 @@ let formdatas={
 
       </div>
   </div>
-  <div class="slider-images-container ">
+  <div class="slider-images-container hidden">
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">
           yotsusan machi |
@@ -159,43 +163,21 @@ let formdatas={
         </ol>
       </div>
   </div>
-  <div class="user-status-container">
-      <div class="user-status-containers">
-        <h1 class="border-b-2 pl-[16px] py-2">message</h1>
-        <ol class="list-none flex flex-col gap-5 py-3">
-          <li class="border-b-2 pl-5">
-            <Icon :color="'green-600 w-[25px]'" :icon="'circle-fill'"/>
-            thanks for download this source code
-          </li>
-          <li class="border-b-2 pl-5">
-            <Icon :color="'rose-600 w-[25px]'" :icon="'circle-fill'"/>  happy learning
-          </li>
-          <li class="border-b-2 pl-5">
-            i hope u can have a good day and have nice friends family
-          </li>
-        </ol>
-      </div>
-  </div>
   <div :class="`user-status-uncut-container ${tooltipUserInfo === false?'opacity-undefine user-info-untogled':'opacity-define user-info-togled'} w-[750px]` ">
       <div class="user-status-containers">
-        <h1 class="border-b-2 pl-[16px] py-2">user informasi</h1>
+        <h1 class="border-b-2 pl-[16px] py-2">pause menu {{ `<${getNameApp}>` }} </h1>
         <ol class="list-none flex flex-col gap-1">
-          <li class="border-b-2 p-5">
-            <Icon :icon="'person-bounding-box'" :color="'white'"/> yotsu
+          <li class="border-b-2 p-5 cursor-pointer transition-all duration-[500] hover:text-[dodgerblue]" @click="()=>{
+            tooltipUserInfo=false
+          }">
+            <Icon :icon="'person-bounding-box'" :color="'white'"/> continue
           </li>
-          <li class="border-b-2 p-5">
-            <Icon :icon="'flag-fill'" :color="'white'"/> indonesia
+          <li class="border-b-2 p-5 cursor-pointer transition-all duration-[500] hover:text-[dodgerblue]">
+            <RouterLink :to="'loading/menu'">
+              <Icon :icon="'flag-fill'" :color="'white'"/> exit to main menu
+            </RouterLink>
           </li>
-          <li class="border-b-2 p-5">
-            <Icon :icon="'fan'" :color="'white'"/> password
-          </li>
-          <li class="border-b-2 p-5">
-            <Icon :icon="'diagram-3'" :color="'white'"/> status
-          </li>
-          <li class="border-b-2 p-5">
-            <Icon :icon="'gender-male'" :color="'white'"/> male
-          </li>
-          <li class="border-b-2 p-5">
+          <li class="border-b-2 p-5 hidden">
             <div class=" status-cut" @mouseenter="()=>{
               if(tooltipUserInfo ==  true)tooltipUserStatus=true
             }"
@@ -220,6 +202,39 @@ let formdatas={
   </div>
 </template>
 <style scoped>
+.continue-filter{
+  transition: all 2s;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 200vh;
+  overflow: hidden;
+  background: linear-gradient(5deg,rgba(0,0,0,1) 40%,rgb(30, 144, 255,.6));
+  top: -9000px;
+}
+.pause-filter{
+  transition: all 2s;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 200vh;
+  overflow: hidden;
+  background: linear-gradient(5deg,rgba(0,0,0,1) 40%,rgb(30, 144, 255,.6));
+}
+.btn-pause{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  backdrop-filter: blur(30px);
+  padding:5px 15px;
+  border: 2px solid #fff !important;
+  transition: all 2s;
+}
+.btn-pause:hover{
+  backdrop-filter: brightness(30%);
+  transition: all 2s;
+  border-radius: 6px;
+}
 
 .element-visible{
   z-index: 900 !important;

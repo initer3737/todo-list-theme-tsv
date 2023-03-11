@@ -12,6 +12,7 @@ import image7 from '@/assets/image7.jpeg'
 import image8 from '@/assets/image8.jpeg'
 import image9 from '@/assets/image9.jpeg'
 import image10 from '@/assets/image10.jpeg'
+import image11 from '@/assets/enemy.jpg'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
@@ -23,7 +24,7 @@ let sliders=[anime1,anime2,anime3];
       return {
        message:'menu ',
        weejiosbg:[anime1,anime3],
-       animehImages:[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10],
+       animehImages:[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11],
        debeh:Debeh(),
        numberIndexweejio:0,
        numberIndeximage:0
