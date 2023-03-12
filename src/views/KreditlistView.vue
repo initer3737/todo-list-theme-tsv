@@ -102,6 +102,26 @@ import { RouterLink } from 'vue-router'
               music themes
             </a>
           </li>
+          <li class="border-b-2">
+            <a :href="`https://pixabay.com/vectors/bullet-gun-rifle-war-159442/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
+              bullet
+            </a>
+          </li>
+          <li class="border-b-2">
+            <a :href="`https://pixabay.com/vectors/sniper-cross-hairs-rifle-crosslines-155485/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
+              target
+            </a>
+          </li>
+          <li class="border-b-2">
+            <a :href="`https://pixabay.com/vectors/rifle-gun-grey-blood-trigger-7149105/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
+              weapon
+            </a>
+          </li>
+          <li class="border-b-2">
+            <a :href="`https://pixabay.com/vectors/ink-red-splatter-abstract-paint-303244/`" target="_blank" class="ease-out duration-600 hover:text-blue-500">
+              blood splatter
+            </a>
+          </li>
         </ol>
       </div>
   </div>

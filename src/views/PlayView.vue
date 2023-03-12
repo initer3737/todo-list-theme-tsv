@@ -11,6 +11,15 @@ import image7 from '@/assets/image7.jpeg'
 import image8 from '@/assets/image8.jpeg'
 import image9 from '@/assets/image9.jpeg'
 import image10 from '@/assets/image10.jpeg'
+import bullet from '@/assets/bullet.png'
+import enemy from '@/assets/enemy.png'
+import enemy_down from '@/assets/enemy_down.png'
+import target from '@/assets/target.png'
+import weapon from '@/assets/weapon.png'
+import sprSoundFire from '@/assets/SPR_2_1.mp3'
+import ammoEmpty from '@/assets/empty-gun.mp3'
+import ammofull from '@/assets/reload1.mp3'
+import reload from '@/assets/reload2.mp3'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import Input from '@/components/atom/Input.vue'
@@ -23,20 +32,55 @@ let formdatas={
   export default{
     data(){
       return {
-       message:'menu ',
+       ammo:1,
+       score:0,
+       hightscore:1,
+       is_fire:true,
        weejiosbg:[anime1,anime3],
        animehImages:[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10],
        debeh:Debeh(),
        numberIndexweejio:0,
        numberIndeximage:0,
        tooltipUserStatus:false,
-       tooltipUserInfo:false,
+       is_pause:false,
        isUploadFile:false,
        formdata:formdatas,
+       coordinateY:0,
+       coordinateX:0
+      }
+    },
+    watch:{
+      score(newValue,oldValue){
+            if(newValue > this.hightscore)this.hightscore++
       }
     },
     mounted(){
-      
+
+          setInterval(()=>{
+            this.coordinateX=this.randomNum(850)
+            this.coordinateY=this.randomNum(350)
+          },1000)
+
+        document.addEventListener('keypress',(e:KeyboardEvent)=>{
+            // if(e.key === 'r')alert('a')
+            if(e.key === 'r'){
+              if(this.ammo === 10){
+                  this.srcAudio(ammofull).play()
+              }else{
+                this.srcAudio(reload).play()
+                setTimeout(()=>{
+                  this.ammo=10
+                },3000)
+              }
+            }
+        })
+
+        document.addEventListener('mousemove',(e:MouseEvent)=>{
+            const target=this.getElement('target')
+            target!.style.top=(e.pageY-20)+'px'
+            target!.style.left=(e.pageX-30)+'px'
+            target!.style.opacity=`1`
+        })
     },
     computed:{
       getNumberIndexSlider(){
@@ -65,24 +109,76 @@ let formdatas={
             // this.formdatas.avatar=target.files[0]
             this.formdata={...this.formdata,[target.id]:target.files![0]}
             this.isUploadFile=true
-      }
+      },
+      srcAudio(src:string){
+        return new Audio(src)
+      },
+      fire(){
+          if(this.is_fire){
+              if(this.ammo !==0)this.score++
+              let sound=sprSoundFire
+              if(this.ammo === 0)sound=ammoEmpty
+              if(this.ammo !==0)this.ammo--
+              this.srcAudio(sound).play()        
+            }
+            if(this.ammo >0)this.is_fire=false
+            setTimeout(()=>{
+              if(this.ammo >0)this.is_fire=true
+            },3000)
+      },
+     randomNum(numb:number){
+        return Math.ceil(Math.random()* numb)
+     },
+     methodEnemy(){
+      // if(this.ammo <=0){
+      //     return enemy
+      // }
+        if(this.is_fire){
+           return enemy
+        }else{
+            return enemy_down
+        }
+     } 
     }
   }
 </script>
 <template>
   <!-- <SubMenuNAv/> -->
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
+    <div class="weapon-container">
+        <img :src="weapon" alt="" class="w-[155px]"> 
+        <div class="flex gap-2 cursor-default">
+          {{ammo}}/90 
+          <div class="flex">
+            <img :src="bullet" alt="" class="w-[10px]">
+            <img :src="bullet" alt="" class="w-[10px]">
+            <img :src="bullet" alt="" class="w-[10px]">
+          </div>
+            <div :class="`reload-message ${ammo == 0?'opacity-define':'opacity-undefine'}`">
+              <h1>press R to reload</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="playing-ground">
+      <img :src="methodEnemy()" alt="" :class="`w-[60px] enemy ${is_fire?'opacity-define':'opacity-undefine'} ${is_pause?'opacity-undefine':'opacity-define'}`" @click="fire()" :style="`--translate-x:${coordinateX}px;--translate-y:${coordinateY}px;`">
+    </div>
+    <div class="score-container">
+      <p>score : {{score}}</p>
+      <p>highScore : {{hightscore}}</p>
+    </div>
+    <img :src="target" alt="" class="w-[55px]" id="target"> 
   <button @click="()=>{
-                tooltipUserInfo=!tooltipUserInfo
+                is_pause=!is_pause
             }" class="btn-pause hover:bg-[dodgerblue]/50">pause</button>
- <div :class="`${tooltipUserInfo === true ?'pause-filter':'continue-filter'}`"></div>           
+ <div :class="`${is_pause === true ?'pause-filter':'continue-filter'}`"></div>           
   <div>
     <!-- <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1> -->
   </div>
   <div class="top3-container h-[670px] hidden">
       <div class="content-container-lobby">
         <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px] cursor-pointer" @click="()=>{
-                tooltipUserInfo=!tooltipUserInfo
+                is_pause=!is_pause
             }">
           <Icon :icon="'info-circle-fill'" :color="'white'"/>
           user setting
@@ -163,12 +259,12 @@ let formdatas={
         </ol>
       </div>
   </div>
-  <div :class="`user-status-uncut-container ${tooltipUserInfo === false?'opacity-undefine user-info-untogled':'opacity-define user-info-togled'} w-[750px]` ">
+  <div :class="`user-status-uncut-container ${is_pause === false?'opacity-undefine user-info-untogled':'opacity-define user-info-togled'} w-[750px]` ">
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">pause menu {{ `<${getNameApp}>` }} </h1>
         <ol class="list-none flex flex-col gap-1">
           <li class="border-b-2 p-5 cursor-pointer transition-all duration-[500] hover:text-[dodgerblue]" @click="()=>{
-            tooltipUserInfo=false
+            is_pause=false
           }">
             <Icon :icon="'person-bounding-box'" :color="'white'"/> continue
           </li>
@@ -179,7 +275,7 @@ let formdatas={
           </li>
           <li class="border-b-2 p-5 hidden">
             <div class=" status-cut" @mouseenter="()=>{
-              if(tooltipUserInfo ==  true)tooltipUserStatus=true
+              if(is_pause ==  true)tooltipUserStatus=true
             }"
             @mouseleave="()=>{
               tooltipUserStatus=false
@@ -202,6 +298,70 @@ let formdatas={
   </div>
 </template>
 <style scoped>
+cursor{
+  z-index: 112;
+}
+#target{
+  opacity: 0;
+  position: absolute;
+  /* cursor: none; */
+  /* z-index: 200; */
+}
+.score-container{
+  position: absolute;
+  right: 10px;
+  bottom: 50%;
+  display: flex;
+  flex-flow:column nowrap;
+  backdrop-filter: blur(30px);
+  padding:50px;
+  border:2px solid #fff;
+  font-size: 21px;
+  color:#fff;
+}
+.playing-ground{
+  cursor: none;
+  position: absolute;
+  min-width: 150px;
+  width: 950px;
+  height: 490px;
+  min-height: 150px;
+  border:2px solid #fff;
+  left: 20px;
+  bottom:0;
+  padding: 4px;
+  background: linear-gradient(45deg,rgba(0,0,0,.6) ,rgba(30, 144, 255,.6));
+  z-index: 10;
+}
+.enemy{
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  transform: translateX(var(--translate-x)) translateY(var(--translate-y));
+  /* transform: translateX(850px) translateY(350px); */
+  transition: all 2s;
+}
+.reload-message{
+  border-bottom: 2px solid dodgerblue;
+  animation: kelip-reload infinite alternate 2s;
+  transition: all 1s;
+}
+@keyframes kelip-reload{
+    /* kelip is indonesian language it mean blink */
+    from{}
+    to{
+      color: royalblue !important;
+      border-bottom: 2px solid #fff;
+    }
+}
+.weapon-container{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #fff;
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
 .continue-filter{
   transition: all 2s;
   position: absolute;
