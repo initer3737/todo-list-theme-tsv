@@ -1,6 +1,21 @@
 <script lang="ts" setup>
 import Icon from '@/components/atom/Icon.vue'
 import { RouterLink } from 'vue-router'
+import { Debeh } from '@/stores/Debeh';
+</script>
+<script lang="ts">
+     export default{
+          data(){
+               return{
+                    debeh:Debeh(),
+                    session:Debeh().getSession(),      
+               }
+          },
+          //sub menu kan adalah komponen dan bukan sesuatu yang di mounted atau yang dirender via router untuk mem fetch api di komponen yang tidak dirender via router maka gunakkan created [saat komponen ini dibuat]
+          created(){
+               this.debeh.fetchSession()
+          }
+     }
 </script>
 <template>
   <div class="menu-container">
@@ -13,7 +28,7 @@ import { RouterLink } from 'vue-router'
       <RouterLink :to="'/loading/galery'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
            <Icon :color="'[#fff]'" :icon="'images'"/>
       </RouterLink>
-      <RouterLink :to="'/loading/user&mama'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
+      <RouterLink :to="`/loading/user&${session['username']}`" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
            <Icon :color="'[#fff]'" :icon="'person-vcard'"/>
       </RouterLink>
       <RouterLink :to="'/loading/kreditlist'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">

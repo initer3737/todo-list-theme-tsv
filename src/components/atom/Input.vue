@@ -9,6 +9,7 @@ import type { Method } from '@babel/types';
             value?:string,
             Accept?:string,
             onChange?:any,
+            VModel?:string,
         };
     defineProps<props>()
 </script>

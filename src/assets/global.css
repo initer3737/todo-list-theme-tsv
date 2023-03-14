@@ -78,3 +78,39 @@ select{
     border-bottom:2px solid white;
     transition: ease 2s;
   }
+
+  .err-msg{
+    color: red;
+    background: linear-gradient(white,dodgerblue);
+    padding:4px 2px;
+    cursor: default;
+    border-bottom: 2px solid red;
+    animation: msg-err 2s infinite alternate;
+  }
+
+
+  @keyframes msg-err {
+    from{}
+    to{
+        color: white;
+        border-bottom: 2px solid white;
+    }
+  }
+
+  .succ-msg{
+    color: green;
+    background: linear-gradient(white,dodgerblue);
+    padding:4px 2px;
+    cursor: default;
+    border-bottom: 2px solid green;
+    animation: msg-succ 2s infinite alternate;
+  }
+
+
+  @keyframes msg-succ {
+    from{}
+    to{
+        color: white;
+        border-bottom: 2px solid white;
+    }
+  }

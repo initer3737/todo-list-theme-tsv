@@ -3,6 +3,8 @@ import anime1 from '@/assets/anime3.mp4'
 import Input from '@/components/atom/Input.vue';
 import { RouterLink } from 'vue-router'
 import {Debeh} from '@/stores/Debeh'
+import { useToken } from '@/services/token';
+
 </script>
 <script lang="ts">
   export default{
@@ -12,8 +14,14 @@ import {Debeh} from '@/stores/Debeh'
           username:'',
           password:''
         },
+        Token:useToken(),
         debeh:Debeh()
       }
+    },
+    updated(){},
+    created(){},
+    mounted(){
+      this.Token.declare()
     },
     computed:{
       getUsername(){

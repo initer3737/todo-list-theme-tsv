@@ -5,6 +5,8 @@ import anime3 from '@/assets/anime3.mp4'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import { RouterLink } from 'vue-router'
+import { Http } from '@/services/http'
+
 </script>
 <script lang="ts">
   export default{
@@ -12,8 +14,19 @@ import { RouterLink } from 'vue-router'
       return {
        message:'menu ',
        weejiosbg:[anime1,anime2,anime3],
-       debeh:Debeh()
+       debeh:Debeh(),
+       index:1,
+       top3info:{
+        data:{username:''}
+       }
       }
+    },
+    mounted(){
+        Http.get('/top3/players/info')
+        .then(res=>{
+           console.log(res)  
+            this.top3info={...res.data.data} 
+        })
     },
     computed:{
       // getUsername(){
@@ -64,10 +77,8 @@ import { RouterLink } from 'vue-router'
   </div>
   <div class="top3-container">
       <h1>top 3 kombatans</h1>
-    <ol class="list-none">
-      <li>1.yotsusan machi</li>
-      <li>2.initer3737</li>
-      <li>3.yotsuba nakano</li>
+    <ol class="list-none" v-for="data , i in top3info" :key="i">
+      <li>{{ Number(i)+1 }}.{{data.username}}</li>
     </ol>
   </div>
 </template>

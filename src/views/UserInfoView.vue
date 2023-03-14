@@ -14,6 +14,8 @@ import image10 from '@/assets/image10.jpeg'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
+import { Http } from '@/services/http'
+import { useRoute } from 'vue-router'
 </script>
 <script lang="ts">
   export default{
@@ -24,9 +26,34 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
        animehImages:[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10],
        debeh:Debeh(),
        numberIndexweejio:0,
-       numberIndeximage:0,
-       tooltip:false
+       numberIndeximage:4,
+       tooltip:false,
+       userInfo:{
+          data:{
+            avatar:'',
+            country:'',
+            emblem:'',
+            gender:'',
+            name:'',
+            ranking:'',
+            score:'',
+            status:'',
+            user_conections:'',
+            username:'',
+          }
+       },
+       param:useRoute()
       }
+    },
+    mounted(){
+      // console.log(this.param.params)
+      Http.get(`/user/${this.param.params.username}`)
+      .then(res=>{
+          console.log(res.data)
+          this.userInfo=res.data
+      }).catch(err=>{
+        console.log(err)
+      })
     },
     computed:{
       getNumberIndexSlider(){
@@ -62,19 +89,24 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
         </h1>
         <ol class="list-none flex flex-col gap-1">
           <li class="border-b-2 p-5">
-            <Icon :icon="'person-bounding-box'" :color="'white'"/> yotsu
+            <Icon :icon="'person-bounding-box'" :color="'white'"/> 
+            {{ userInfo.data.name}}
           </li>
           <li class="border-b-2 p-5">
-            <Icon :icon="'flag-fill'" :color="'white'"/> indonesia
+            <Icon :icon="'flag-fill'" :color="'white'"/> 
+            {{ userInfo.data.country}}
           </li>
           <li class="border-b-2 p-5">
-            <Icon :icon="'fan'" :color="'white'"/> 25.000.000
+            <Icon :icon="'fan'" :color="'white'"/>
+            {{ userInfo.data.score}}
           </li>
           <li class="border-b-2 p-5">
-            <Icon :icon="'diagram-3'" :color="'white'"/> 1
+            <Icon :icon="'diagram-3'" :color="'white'"/>
+            {{ userInfo.data.ranking}}
           </li>
           <li class="border-b-2 p-5">
-            <Icon :icon="'award-fill'" :color="'white'"/> godong gedang
+            <Icon :icon="'award-fill'" :color="'white'"/>
+            {{ userInfo.data.emblem}}
           </li>
           <li class="border-b-2 p-5">
             <div class=" status-cut" @mouseenter="()=>{
@@ -84,7 +116,8 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
                 tooltip=false
             }"
             >
-            <Icon :icon="'pencil-square'" :color="'white'"/> {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,10)+'...hover me!' }}
+            <Icon :icon="'pencil-square'" :color="'white'"/>
+              {{ userInfo.data.status.substring(0,10)}}+'...hover me!
             </div>
           </li>
         </ol>
@@ -94,13 +127,13 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
   <div class="slider-images-container ">
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">
-          yotsusan machi |
+          {{ userInfo.data.username}} |
           <Icon :icon="'gender-male'" :color="'white'"/> |
-          <Icon :icon="'circle-fill'" :color="` text-green-600`"/> 
+          <Icon :icon="'circle-fill'" :color="` ${userInfo.data.user_conections === 'online'?'text-green-600':'text-red-600'} `"/> 
         </h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5 pb-2">
-            <img :src="animehImages[getNumberIndexAnimehImage]" alt="image slider" srcset="" class="ease-out duration-600 object-center w-[350px] h-[350px]">
+            <img :src="userInfo.data.avatar !== null?debeh.getAvatar+userInfo.data.avatar:animehImages[getNumberIndexAnimehImage]" alt="image slider" srcset="" class="ease-out duration-600 object-center w-[350px] h-[350px]">
           </li>
         </ol>
       </div>
@@ -127,7 +160,7 @@ import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
         <h1 class="border-b-2 pl-[16px] py-2">status</h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5">
-            voluptas corporis eligendi perspiciatis voluptatem sit maiores perferendis, nesciunt maxime itaque qui architecto enim doloremque praesentium reiciendis, incidunt commodi veniam sint unde repellat repellendus! Nobis quaerat, a totam consequatur laborum at esse sunt assumenda, quod officiis minima odit incidunt ad quos blanditiis sapiente laboriosam saepe voluptas explicabo 
+            {{ userInfo.data.status}}
           </li>
         </ol>
       </div>

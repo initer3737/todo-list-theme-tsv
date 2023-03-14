@@ -24,6 +24,7 @@ import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import Input from '@/components/atom/Input.vue'
 import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
+import { Http } from '@/services/http'
 </script>
 <script lang="ts">
 let formdatas={
@@ -32,10 +33,12 @@ let formdatas={
   export default{
     data(){
       return {
-       ammo:1,
+       ammo:10,
        score:0,
-       hightscore:1,
+       hightscore:0,
        is_fire:true,
+       is_hit:false,
+      //  is_miss:false,
        weejiosbg:[anime1,anime3],
        animehImages:[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10],
        debeh:Debeh(),
@@ -46,15 +49,40 @@ let formdatas={
        isUploadFile:false,
        formdata:formdatas,
        coordinateY:0,
-       coordinateX:0
+       coordinateX:0,
+      }
+    },
+    updated(){
+      if(this.score > this.hightscore){
+          Http.post('/game/update',{score:this.score})
+              .then(res=>{
+                  console.log(res.data.data[0].score)
+              })
+              Http.get('/game/score')
+              .then(res=>{
+                  console.log(res.data.data[0].score)
+                  this.hightscore=res.data.data[0].score
+              })
+            // }
       }
     },
     watch:{
       score(newValue,oldValue){
-            if(newValue > this.hightscore)this.hightscore++
+            if(newValue > this.hightscore){
+              // Http.get('/game/score')
+              // .then(res=>{
+              //     console.log(res.data.data[0].score)
+              //     this.hightscore=res.data.data[0].score
+              // })
+            }
       }
     },
     mounted(){
+        Http.get('/game/score')
+        .then(res=>{
+            console.log(res.data.data[0].score)
+            this.hightscore=res.data.data[0].score
+        })
 
           setInterval(()=>{
             this.coordinateX=this.randomNum(850)
@@ -113,17 +141,35 @@ let formdatas={
       srcAudio(src:string){
         return new Audio(src)
       },
-      fire(){
-          if(this.is_fire){
+      hit(){
+            this.is_hit=true
+        if(this.is_hit === true){
               if(this.ammo !==0)this.score++
               let sound=sprSoundFire
               if(this.ammo === 0)sound=ammoEmpty
               if(this.ammo !==0)this.ammo--
               this.srcAudio(sound).play()        
             }
+
+              // this.is_fire=false
+            setTimeout(()=>{
+              // this.is_fire=true
+              this.is_hit=false
+            },3000)
+      },
+      fire(){
+          if(this.is_fire){
+              // if(this.ammo !==0)this.score++
+              let sound=sprSoundFire
+              if(this.ammo === 0)sound=ammoEmpty
+              if(this.ammo !==0)this.ammo--
+              this.srcAudio(sound).play()  
+              // this.is_miss=true      
+            }
             if(this.ammo >0)this.is_fire=false
             setTimeout(()=>{
               if(this.ammo >0)this.is_fire=true
+              // this.is_miss=false
             },3000)
       },
      randomNum(numb:number){
@@ -133,7 +179,7 @@ let formdatas={
       // if(this.ammo <=0){
       //     return enemy
       // }
-        if(this.is_fire){
+        if(this.is_hit === false){
            return enemy
         }else{
             return enemy_down
@@ -157,11 +203,14 @@ let formdatas={
             <div :class="`reload-message ${ammo == 0?'opacity-define':'opacity-undefine'}`">
               <h1>press R to reload</h1>
             </div>
+            <div :class="`reload-message ${is_hit === true?'opacity-define':'opacity-undefine'}`">
+              <h1>hit!!!</h1>
+            </div>
         </div>
     </div>
 
-    <div class="playing-ground">
-      <img :src="methodEnemy()" alt="" :class="`w-[60px] enemy ${is_fire?'opacity-define':'opacity-undefine'} ${is_pause?'opacity-undefine':'opacity-define'}`" @click="fire()" :style="`--translate-x:${coordinateX}px;--translate-y:${coordinateY}px;`">
+    <div class="playing-ground" @click="fire()">
+      <img :src="methodEnemy()" alt="" :class="`w-[60px] enemy ${is_hit === false?'opacity-define':'opacity-undefine'} ${is_pause?'opacity-undefine':'opacity-define'}`" @click="hit()" :style="`--translate-x:${coordinateX}px;--translate-y:${coordinateY}px;`">
     </div>
     <div class="score-container">
       <p>score : {{score}}</p>
@@ -172,93 +221,7 @@ let formdatas={
                 is_pause=!is_pause
             }" class="btn-pause hover:bg-[dodgerblue]/50">pause</button>
  <div :class="`${is_pause === true ?'pause-filter':'continue-filter'}`"></div>           
-  <div>
-    <!-- <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1> -->
-  </div>
-  <div class="top3-container h-[670px] hidden">
-      <div class="content-container-lobby">
-        <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px] cursor-pointer" @click="()=>{
-                is_pause=!is_pause
-            }">
-          <Icon :icon="'info-circle-fill'" :color="'white'"/>
-          user setting
-        </h1>
-        <ol class="list-none flex flex-col gap-1">
-          <li class="border-b-2 p-2 flex items-center gap-3">
-            <Icon :icon="'pencil-square person-bounding-box'" :color="'white'"/> 
-           <div class="flex flex-col">
-             <Input :label="'username'" :placeholder="'username'" :id="'username'"/>
-           </div>
-          </li>
-          <li class="border-b-2 p-2 flex items-center gap-3">
-            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
-           <div class="flex flex-col">
-             <Input :label="'name'" :placeholder="'name'" :id="'name'" />
-           </div>
-          </li>
-          <li class="border-b-2 p-2 flex items-center gap-3">
-            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
-           <div class="flex flex-col">
-             <Input :label="'country'" :placeholder="'country'" :id="'country'" />
-           </div>
-          </li>
-          <li class="border-b-2 p-2 flex items-center gap-3">
-            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
-           <div class="flex flex-col">
-             <Input :label="'status'" :placeholder="'status'" :id="'status'" />
-           </div>
-          </li>
-          <li class="border-b-2 p-2 flex items-center gap-3">
-            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
-           <div class="flex flex-row gap-3">
-            <select name="" id="gender">
-                <option value="">gender</option>
-                <option value="male">male</option>
-                <option value="female">female</option>
-            </select>
-           </div>
-          </li>
-          <li class="border-b-2 p-2 flex items-center gap-3">
-            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
-           <div class="flex flex-col">
-             <Input :label="'password'" :placeholder="'password'" :id="'password'" :type="'password'"/>
-           </div>
-          </li>
-          <li class="border-b-2 p-2 flex items-center gap-3">
-            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
-           <div class="flex flex-col">
-             <Input :label="'password_confirm'" :placeholder="'password confirm'" :id="'password_confirm'" :type="'password'" />
-           </div>
-          </li>
-          <li class="border-b-2 p-2 flex items-center gap-3 hidden">
-            <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
-           <div class="flex flex-col">
-             <Input :label="'avatar'" :placeholder="'avatar'" :id="'avatar'" :type="'file'" :Accept="'image/*'" :onchange="readImage"/>
-           </div>
-          </li>
-          <li class="border-b-2 p-2 flex justify-center items-center gap-3">
-            <div class="cursor-pointer">
-              <button>submit</button>
-            </div>
-          </li>
-        </ol>
-
-      </div>
-  </div>
-  <div class="slider-images-container hidden">
-      <div class="user-status-containers">
-        <h1 class="border-b-2 pl-[16px] py-2">
-          yotsusan machi |
-          <Icon :icon="'gender-male'" :color="'white'"/> |
-          <button @click="modalAvatar()">ganti gambar <Icon v-show="isUploadFile == true" :color="' text-pink-400'" :icon="'instagram'"/> </button>
-        </h1>
-        <ol class="list-none flex flex-col gap-5 py-3">
-          <li class="border-b-2 pl-5 pb-2">
-            <img :src="animehImages[getNumberIndexAnimehImage]" alt="image slider" srcset="" class="ease-out duration-600 object-center w-[350px] h-[350px]">
-          </li>
-        </ol>
-      </div>
-  </div>
+ 
   <div :class="`user-status-uncut-container ${is_pause === false?'opacity-undefine user-info-untogled':'opacity-define user-info-togled'} w-[750px]` ">
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">pause menu {{ `<${getNameApp}>` }} </h1>
@@ -282,16 +245,6 @@ let formdatas={
             }">
             <Icon :icon="'pencil-square'" :color="'white'"/> {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,10)+'...hover me!' }}
             </div>
-          </li>
-        </ol>
-      </div>
-  </div>
-  <div :class="`user-status-tooltip ${tooltipUserStatus === false?'opacity-undefine element-invisible':'opacity-define element-visible'} w-[750px] ` ">
-      <div class="user-status-containers">
-        <h1 class="border-b-2 pl-[16px] py-2">status</h1>
-        <ol class="list-none flex flex-col gap-5 py-3">
-          <li class="border-b-2 pl-5">
-            voluptas corporis eligendi perspiciatis voluptatem sit maiores perferendis, nesciunt maxime itaque qui architecto enim doloremque praesentium reiciendis, incidunt commodi veniam sint unde repellat repellendus! Nobis quaerat, a totam consequatur laborum at esse sunt assumenda, quod officiis minima odit incidunt ad quos blanditiis sapiente laboriosam saepe voluptas explicabo 
           </li>
         </ol>
       </div>

@@ -1,5 +1,7 @@
-import { ref, computed } from 'vue'
+import { ref, computed ,reactive} from 'vue'
 import { defineStore } from 'pinia'
+import { Http } from '@/services/http'
+import { mount } from '@vue/test-utils'
 
 export const Debeh = defineStore('debeh', () => {
   const debehApp={
@@ -8,5 +10,25 @@ export const Debeh = defineStore('debeh', () => {
   const debeh = ref(debehApp)
   const appName = computed(() => debeh.value.name)
 
-  return { appName }
+// interface Isession {
+//     data:{
+//       username:string
+//     }
+// }
+  let userSession=reactive({
+    username:'',
+    score:'',
+    avatar:''
+  }) 
+
+  async function fetchSession(){
+    const {data}=await Http.get('session/profile')
+      userSession={...data.data[0]}
+  }
+
+  function getSession(){
+      return userSession
+  }
+  const getAvatar='http://localhost:8000/storage/avatar/'
+  return { appName ,fetchSession,getSession,getAvatar}
 })

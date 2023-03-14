@@ -1,6 +1,6 @@
 class Token{
-    protected tokenName: string;
-    protected getToken: string | null;
+    public tokenName: string;
+    public getToken: string | null;
     constructor(){
         this.tokenName='token'
         this.getToken=localStorage.getItem(this.tokenName)
@@ -14,8 +14,16 @@ class Token{
         }
     }
 
+    checkTokenIsEmpty(){
+        if(this.getToken?.trim().length! < 1 ){
+            return true
+        }else{
+            return false
+        }
+    }
+
    declare(){
-     localStorage.setItem(this.tokenName,'')
+     if(this.checkTokenIsNull() === true )localStorage.setItem(this.tokenName,'')
    }
    getTokenValue(){
     return this.getToken
