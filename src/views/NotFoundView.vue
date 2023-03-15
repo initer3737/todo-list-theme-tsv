@@ -33,7 +33,7 @@ import {Debeh} from '@/stores/Debeh'
 <template>
   <div class="text-container">
     <h1>{{ message }}</h1>
-    <button @click="$router.go(-1)">back</button>
+    <button @click="$router.go(-2)">back</button>
   </div>
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
   <div>

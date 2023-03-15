@@ -15,10 +15,18 @@ import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import Input from '@/components/atom/Input.vue'
 import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
+import { Http } from '@/services/http'
 </script>
 <script lang="ts">
 let formdatas={
-    avatar:''
+    avatar:'',
+    username:'',
+    name:'',
+    country:'',
+    status:'',
+    gender:'',
+    password:'',
+    password_confirm:''
 }
   export default{
     data(){
@@ -33,17 +41,94 @@ let formdatas={
        tooltipUserInfo:false,
        isUploadFile:false,
        formdata:formdatas,
+       settingInfo:{
+          data:[{
+            avatar:'' ,
+            country:"",
+            gender:"",
+            name:"",
+            password:"",
+            score:'',
+            status:"",
+            user_conections: "",
+            username:""
+          }]
+       },
+       isSettingUpdate:false,
+       errMessage:{
+          data:{
+            errors:{
+              country:[],
+              username:[],
+              name:[],
+              avatar:[],
+              status:[],
+              password:[],
+              password_confirm:[],
+            },
+            message:''
+          }
+       }
       }
     },
     mounted(){
-      
+      Http.get('/setting/info')
+      .then(res=>{
+        console.log('res will be',res)
+        this.settingInfo=res.data
+      }).catch(err=>{
+          console.log('err will be',err)
+      })
+    },
+    watch:{
+      isSettingUpdate(newValue,oldValue){
+            if(newValue === true){
+              Http.get('/setting/info')
+              .then(res=>{
+                console.log('res will be',res)
+                this.settingInfo=res.data
+              }).catch(err=>{
+                  console.log('err will be',err)
+              })
+            }
+      },
+      // isUploadFile(newValue,oldValue){
+      //     if(newValue === true){
+      //         setTimeout(() => {
+      //             this.isUploadFile=false
+      //         }, 4000);
+      //     }
+      // }
+    },
+    updated(){
+        if(this.isSettingUpdate === true){
+          // Http.get('/setting/info')
+          //   .then(res=>{
+          //     console.log('res will be',res)
+          //     this.settingInfo=res.data
+          //   }).catch(err=>{
+          //       console.log('err will be',err)
+          //   })
+        }
+        //
+        setTimeout(()=>{
+            this.errMessage.data.message=''
+            this.errMessage.data.errors.username.length=0
+            this.errMessage.data.errors.country.length=0
+            this.errMessage.data.errors.name.length=0
+            this.errMessage.data.errors.status.length=0
+            this.errMessage.data.errors.password.length=0
+            this.errMessage.data.errors.password_confirm.length=0
+            this.errMessage.data.errors.avatar.length=0
+        },4000)
     },
     computed:{
       getNumberIndexSlider(){
         return this.numberIndexweejio
       },
       getNumberIndexAnimehImage(){
-        return this.numberIndeximage
+        const randomize=Math.ceil(Math.random()*this.animehImages.length-1);
+        return randomize
       },
       getWeejioBegeh(){
         const randomize= Math.ceil(Math.random()*this.weejiosbg.length -1);
@@ -60,11 +145,41 @@ let formdatas={
       modalAvatar(){
         this.getElement('avatar')?.click()
       },
-      readImage(e:Event){
+      OnChangeFile(e:Event){
           const target=(<HTMLInputElement>e.currentTarget)
             // this.formdatas.avatar=target.files[0]
             this.formdata={...this.formdata,[target.id]:target.files![0]}
             this.isUploadFile=true
+      },
+      OnChange(e:Event){
+          const target=(<HTMLInputElement>e.target)
+            // this.formdatas.avatar=target.files[0]
+            this.formdata={...this.formdata,[target.id]:target.value}
+      },
+      OnChangeSelect(e:Event){
+          const target=(<HTMLSelectElement>e.target)
+            // this.formdatas.avatar=target.files[0]
+            this.formdata={...this.formdata,[target.id]:target.selectedOptions[0].value}
+      },
+      sendDataSetting(){
+          Http.post('/setting',this.formdata)
+          .then(res=>{
+              console.log('response success will be',res.status)
+              if(res.status === 200){
+                    this.isSettingUpdate=true
+                setTimeout(()=>{
+                  this.isSettingUpdate=false
+                  this.isUploadFile=false
+                },4000)
+              }
+          }).catch(({response})=>{
+              console.log('err will be ',response)
+              this.errMessage=response
+          })
+          //   this.isSettingUpdate=true
+          // setTimeout(()=>{
+          //   this.isSettingUpdate=false
+          // },1000)
       }
     }
   }
@@ -75,6 +190,8 @@ let formdatas={
   <div>
     <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1>
   </div>
+
+<form method="post" @submit.prevent="sendDataSetting">
   <div class="top3-container h-[670px]">
       <div class="content-container-lobby">
         <h1 class="border-b-2 pl-[16px] pb-2 pl-[120px] cursor-pointer" @click="()=>{
@@ -87,31 +204,36 @@ let formdatas={
           <li class="border-b-2 p-2 flex items-center gap-3">
             <Icon :icon="'pencil-square person-bounding-box'" :color="'white'"/> 
            <div class="flex flex-col">
-             <Input :label="'username'" :placeholder="'username'" :id="'username'"/>
+            <h3 class="err-msg" v-show="errMessage.data.message.length > 1">{{errMessage.data.message}}</h3>
+             <Input :label="'username'" :placeholder="'username'" :id="'username'" :onChange="OnChange"/>
+             <h3 class="err-msg" v-show="errMessage.data.errors?.username !== undefined" v-for="err in errMessage.data.errors?.username">{{err}}</h3>
            </div>
           </li>
           <li class="border-b-2 p-2 flex items-center gap-3">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-col">
-             <Input :label="'name'" :placeholder="'name'" :id="'name'" />
+             <Input :label="'name'" :placeholder="'name'" :id="'name'" :onChange="OnChange"/>
+             <h3 class="err-msg" v-show="errMessage.data.errors?.name !== undefined" v-for="err in errMessage.data.errors?.name">{{err}}</h3>
            </div>
           </li>
           <li class="border-b-2 p-2 flex items-center gap-3">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-col">
-             <Input :label="'country'" :placeholder="'country'" :id="'country'" />
+             <Input :label="'country'" :placeholder="'country'" :id="'country'" :onChange="OnChange"/>
+             <h3 class="err-msg" v-show="errMessage.data.errors?.country !== undefined" v-for="err in errMessage.data.errors?.country">{{err}}</h3>
            </div>
           </li>
           <li class="border-b-2 p-2 flex items-center gap-3">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-col">
-             <Input :label="'status'" :placeholder="'status'" :id="'status'" />
-           </div>
+             <Input :label="'status'" :placeholder="'status'" :id="'status'" :onChange="OnChange"/>
+             <h3 class="err-msg" v-show="errMessage.data.errors?.status !== undefined" v-for="err in errMessage.data.errors?.status">{{err}}</h3>
+          </div>
           </li>
           <li class="border-b-2 p-2 flex items-center gap-3">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-row gap-3">
-            <select name="" id="gender">
+            <select name="" id="gender" :onChange="OnChangeSelect">
                 <option value="">gender</option>
                 <option value="male">male</option>
                 <option value="female">female</option>
@@ -121,19 +243,21 @@ let formdatas={
           <li class="border-b-2 p-2 flex items-center gap-3">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-col">
-             <Input :label="'password'" :placeholder="'password'" :id="'password'" :type="'password'"/>
+             <Input :label="'password'" :placeholder="'password'" :id="'password'" :type="'password'" :onChange="OnChange"/>
+             <h3 class="err-msg" v-show="errMessage.data.errors?.password !== undefined" v-for="err in errMessage.data.errors?.password">{{err}}</h3>
            </div>
           </li>
           <li class="border-b-2 p-2 flex items-center gap-3">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-col">
-             <Input :label="'password_confirm'" :placeholder="'password confirm'" :id="'password_confirm'" :type="'password'" />
+             <Input :label="'password_confirm'" :placeholder="'password confirm'" :id="'password_confirm'" :type="'password'" :onChange="OnChange"/>
+             <h3 class="err-msg" v-show="errMessage.data.errors?.password_confirm !== undefined" v-for="err in errMessage.data.errors?.password_confirm">{{err}}</h3>
            </div>
           </li>
           <li class="border-b-2 p-2 flex items-center gap-3 hidden">
             <Icon :icon="'pencil-square flag-fill'" :color="'white'"/> 
            <div class="flex flex-col">
-             <Input :label="'avatar'" :placeholder="'avatar'" :id="'avatar'" :type="'file'" :Accept="'image/*'" :onchange="readImage"/>
+             <Input :label="'avatar'" :placeholder="'avatar'" :id="'avatar'" :type="'file'" :Accept="'image/*'" :onChange="OnChangeFile"/>
            </div>
           </li>
           <li class="border-b-2 p-2 flex justify-center items-center gap-3">
@@ -145,16 +269,20 @@ let formdatas={
 
       </div>
   </div>
+</form>
   <div class="slider-images-container ">
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">
-          yotsusan machi |
-          <Icon :icon="'gender-male'" :color="'white'"/> |
-          <button @click="modalAvatar()">ganti gambar <Icon v-show="isUploadFile == true" :color="' text-pink-400'" :icon="'instagram'"/> </button>
+          {{settingInfo.data[0].username}} |
+          <Icon :icon="`gender-${settingInfo.data[0].gender}`" :color="'white'"/> |
+          <button @click="modalAvatar()">ganti gambar <Icon v-show="isUploadFile == true" :color="' text-green-400'" :icon="'check-circle'"/> </button>
         </h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5 pb-2">
-            <img :src="animehImages[getNumberIndexAnimehImage]" alt="image slider" srcset="" class="ease-out duration-600 object-center w-[350px] h-[350px]">
+            <img :src="settingInfo.data[0].avatar !==null?debeh.getAvatar+settingInfo.data[0].avatar:animehImages[getNumberIndexAnimehImage]" alt="image slider" srcset="" class="ease-out duration-600 object-center w-[350px] h-[350px]">
+          </li>
+          <li class="border-b-2 pl-5 pb-2">
+            <h3 class="err-msg" v-show="errMessage.data.errors?.avatar !== undefined" v-for="err in errMessage.data.errors?.avatar">{{err}}</h3>
           </li>
         </ol>
       </div>
@@ -181,10 +309,16 @@ let formdatas={
         <h1 class="border-b-2 pl-[16px] py-2">user informasi</h1>
         <ol class="list-none flex flex-col gap-1">
           <li class="border-b-2 p-5">
-            <Icon :icon="'person-bounding-box'" :color="'white'"/> yotsu
+            <Icon :icon="'person-vcard-fill'" :color="'white'"/> 
+            {{settingInfo.data[0].username}}
           </li>
           <li class="border-b-2 p-5">
-            <Icon :icon="'flag-fill'" :color="'white'"/> indonesia
+            <Icon :icon="'person-bounding-box'" :color="'white'"/> 
+            {{settingInfo.data[0].name}}
+          </li>
+          <li class="border-b-2 p-5">
+            <Icon :icon="'flag-fill'" :color="'white'"/> 
+            {{settingInfo.data[0].country}}
           </li>
           <li class="border-b-2 p-5">
             <Icon :icon="'fan'" :color="'white'"/> password
@@ -193,7 +327,7 @@ let formdatas={
             <Icon :icon="'diagram-3'" :color="'white'"/> status
           </li>
           <li class="border-b-2 p-5">
-            <Icon :icon="'gender-male'" :color="'white'"/> male
+            <Icon :icon="`gender-${settingInfo.data[0].gender}`" :color="'white'"/> {{settingInfo.data[0].gender}}
           </li>
           <li class="border-b-2 p-5">
             <div class=" status-cut" @mouseenter="()=>{
@@ -202,7 +336,8 @@ let formdatas={
             @mouseleave="()=>{
               tooltipUserStatus=false
             }">
-            <Icon :icon="'pencil-square'" :color="'white'"/> {{'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid nam magni, optio, sapiente natus voluptates dicta non consequuntur quidem sint? Eligendi earum pariatur odit.'.substring(0,10)+'...hover me!' }}
+            <Icon :icon="'pencil-square'" :color="'white'"/> {{
+            settingInfo.data[0].status.substring(0,10)+'...hover me!' }}
             </div>
           </li>
         </ol>
@@ -213,7 +348,7 @@ let formdatas={
         <h1 class="border-b-2 pl-[16px] py-2">status</h1>
         <ol class="list-none flex flex-col gap-5 py-3">
           <li class="border-b-2 pl-5">
-            voluptas corporis eligendi perspiciatis voluptatem sit maiores perferendis, nesciunt maxime itaque qui architecto enim doloremque praesentium reiciendis, incidunt commodi veniam sint unde repellat repellendus! Nobis quaerat, a totam consequatur laborum at esse sunt assumenda, quod officiis minima odit incidunt ad quos blanditiis sapiente laboriosam saepe voluptas explicabo 
+            {{settingInfo.data[0].status}}
           </li>
         </ol>
       </div>

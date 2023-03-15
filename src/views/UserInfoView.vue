@@ -61,7 +61,7 @@ import { useRoute } from 'vue-router'
       },
       getNumberIndexAnimehImage(){
           // this.animehImages.length
-          const randomize=Math.round(Math.random()*this.animehImages.length-1);
+          const randomize=Math.ceil(Math.random()*this.animehImages.length-1);
         return randomize;
       },
       getWeejioBegeh(){
@@ -90,6 +90,10 @@ import { useRoute } from 'vue-router'
           user information
         </h1>
         <ol class="list-none flex flex-col gap-1">
+          <li class="border-b-2 p-5">
+            <Icon :icon="'person-vcard-fill'" :color="'white'"/> 
+            {{userInfo.data.username}}
+          </li>
           <li class="border-b-2 p-5">
             <Icon :icon="'person-bounding-box'" :color="'white'"/> 
             {{ userInfo.data.name}}
