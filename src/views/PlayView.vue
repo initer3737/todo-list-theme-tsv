@@ -182,9 +182,16 @@ let formdatas={
         if(this.is_hit === false){
            return enemy
         }else{
-            return enemy_down
+            return this.ammo===0?enemy:enemy_down
         }
-     } 
+     } ,
+     enemyEffectBlast(){
+         if(this.is_hit === false){
+            return 'opacity-define'
+         }else{
+          return this.ammo > 0?'opacity-undefine':'opacity-define'
+         }
+     }
     }
   }
 </script>
@@ -203,14 +210,14 @@ let formdatas={
             <div :class="`reload-message ${ammo == 0?'opacity-define':'opacity-undefine'}`">
               <h1>press R to reload</h1>
             </div>
-            <div :class="`reload-message ${is_hit === true?'opacity-define':'opacity-undefine'}`">
+            <div :class="`reload-message ${is_hit === true && ammo>0?'opacity-define':'opacity-undefine'}`">
               <h1>hit!!!</h1>
             </div>
         </div>
     </div>
 
     <div class="playing-ground" @click="fire()">
-      <img :src="methodEnemy()" alt="" :class="`w-[60px] enemy ${is_hit === false?'opacity-define':'opacity-undefine'} ${is_pause?'opacity-undefine':'opacity-define'}`" @click="hit()" :style="`--translate-x:${coordinateX}px;--translate-y:${coordinateY}px;`">
+      <img :src="methodEnemy()" alt="" :class="`w-[60px] enemy ${enemyEffectBlast()} ${is_pause?'opacity-undefine':'opacity-define'}`" @click="hit()" :style="`--translate-x:${coordinateX}px;--translate-y:${coordinateY}px;`">
     </div>
     <div class="score-container">
       <p>score : {{score}}</p>
@@ -293,6 +300,7 @@ cursor{
   transform: translateX(var(--translate-x)) translateY(var(--translate-y));
   /* transform: translateX(850px) translateY(350px); */
   transition: all 2s;
+  cursor: none;
 }
 .reload-message{
   border-bottom: 2px solid dodgerblue;

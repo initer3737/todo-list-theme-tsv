@@ -4,6 +4,7 @@ import Input from '@/components/atom/Input.vue';
 import { RouterLink } from 'vue-router'
 import {Debeh} from '@/stores/Debeh'
 import { Http } from '@/services/http';
+import { useToken } from '@/services/token';
 </script>
 <script lang="ts">
  
@@ -16,6 +17,7 @@ import { Http } from '@/services/http';
           password_confirm:''
         },
        debeh:Debeh(),
+       Token:useToken(),
        succmessage:{
         message:''
        },
@@ -30,6 +32,11 @@ import { Http } from '@/services/http';
        }
       }
     }
+    },
+    mounted(){
+      if( !this.Token.checkTokenIsEmpty() ){
+          this.$router.push('/menu')
+      }
     },
     computed:{
       getUsername(){

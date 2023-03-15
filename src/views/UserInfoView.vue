@@ -26,7 +26,7 @@ import { useRoute } from 'vue-router'
        animehImages:[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10],
        debeh:Debeh(),
        numberIndexweejio:0,
-       numberIndeximage:4,
+       numberIndeximage:0,
        tooltip:false,
        userInfo:{
           data:{
@@ -60,7 +60,9 @@ import { useRoute } from 'vue-router'
         return this.numberIndexweejio
       },
       getNumberIndexAnimehImage(){
-        return this.numberIndeximage
+          // this.animehImages.length
+          const randomize=Math.round(Math.random()*this.animehImages.length-1);
+        return randomize;
       },
       getWeejioBegeh(){
         const randomize= Math.ceil(Math.random()*this.weejiosbg.length -1);
@@ -128,7 +130,7 @@ import { useRoute } from 'vue-router'
       <div class="user-status-containers">
         <h1 class="border-b-2 pl-[16px] py-2">
           {{ userInfo.data.username}} |
-          <Icon :icon="'gender-male'" :color="'white'"/> |
+          <Icon :icon="`gender-${userInfo.data.gender}`" :color="'white'"/> |
           <Icon :icon="'circle-fill'" :color="` ${userInfo.data.user_conections === 'online'?'text-green-600':'text-red-600'} `"/> 
         </h1>
         <ol class="list-none flex flex-col gap-5 py-3">

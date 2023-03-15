@@ -43,6 +43,11 @@ import { useToken } from '@/services/token';
         }
       }
     },
+    mounted(){
+      if( !this.Token.checkTokenIsEmpty() ){
+          this.$router.push('/menu')
+      }
+    },
     computed:{
       getUsername(){
         return this.formdata.username

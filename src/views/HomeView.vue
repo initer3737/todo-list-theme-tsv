@@ -22,6 +22,9 @@ import { useToken } from '@/services/token';
     created(){},
     mounted(){
       this.Token.declare()
+      if( !this.Token.checkTokenIsEmpty() ){
+          this.$router.push('/menu')
+      }
     },
     computed:{
       getUsername(){
