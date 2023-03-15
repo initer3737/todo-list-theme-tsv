@@ -2,6 +2,17 @@
 import anime1 from '@/assets/anime1.mp4'
 import anime2 from '@/assets/anime2.mp4'
 import anime3 from '@/assets/anime3.mp4'
+import theme1 from '@/assets/theme-game1.mp3'
+import theme2 from '@/assets/theme-game2.mp3'
+import theme3 from '@/assets/theme-game3.mp3'
+import theme4 from '@/assets/theme-game4.mp3'
+import theme5 from '@/assets/theme-game5.mp3'
+import theme6 from '@/assets/theme-game6.mp3'
+import theme7 from '@/assets/theme-game7.mp3'
+import theme8 from '@/assets/theme-game8.mp3'
+import theme9 from '@/assets/theme-game9.mp3'
+import theme10 from '@/assets/theme-game10.mp3'
+import theme11 from '@/assets/theme-game11.mp3'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import { RouterLink } from 'vue-router'
@@ -18,7 +29,9 @@ import { Http } from '@/services/http'
        index:1,
        top3info:{
         data:{username:''}
-       }
+       },
+       audio:(src:string)=>new Audio(src),
+       themes:[theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10,theme11]
       }
     },
     mounted(){
@@ -27,6 +40,16 @@ import { Http } from '@/services/http'
            console.log(res)  
             this.top3info={...res.data.data} 
         })
+        //audio
+        const audio=this.getDataAudio
+        audio.loop=true 
+        audio.play()
+        
+    },
+    unmounted(){
+      //audio
+      this.getDataAudio.pause()
+        // audio.pause()
     },
     computed:{
       // getUsername(){
@@ -38,6 +61,11 @@ import { Http } from '@/services/http'
       },
       getNameApp(){
         return this.debeh.appName
+      },
+      getDataAudio(){
+        const randomize=Math.ceil(Math.random()* this.themes.length-1)
+        const audio=this.audio(this.themes[randomize])
+        return audio
       }
     },
     methods:{

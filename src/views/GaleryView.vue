@@ -13,6 +13,17 @@ import image8 from '@/assets/image8.jpeg'
 import image9 from '@/assets/image9.jpeg'
 import image10 from '@/assets/image10.jpeg'
 import image11 from '@/assets/enemy.jpg'
+import theme1 from '@/assets/theme-game1.mp3'
+import theme2 from '@/assets/theme-game2.mp3'
+import theme3 from '@/assets/theme-game3.mp3'
+import theme4 from '@/assets/theme-game4.mp3'
+import theme5 from '@/assets/theme-game5.mp3'
+import theme6 from '@/assets/theme-game6.mp3'
+import theme7 from '@/assets/theme-game7.mp3'
+import theme8 from '@/assets/theme-game8.mp3'
+import theme9 from '@/assets/theme-game9.mp3'
+import theme10 from '@/assets/theme-game10.mp3'
+import theme11 from '@/assets/theme-game11.mp3'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import SubMenuNAv from '@/components/molekuls/SubMenuNav.vue'
@@ -27,7 +38,9 @@ let sliders=[anime1,anime2,anime3];
        animehImages:[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11],
        debeh:Debeh(),
        numberIndexweejio:0,
-       numberIndeximage:0
+       numberIndeximage:0,
+       audio:(src:string)=>new Audio(src),
+       themes:[theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10,theme11]
       }
     },
     mounted(){
@@ -43,9 +56,14 @@ let sliders=[anime1,anime2,anime3];
                   this.numberIndeximage=0
               };
         },5000);
+        //audio
+      const audio=this.getDataAudio
+        audio.loop=true 
+        audio.play()
     },
-    onUnmounted(){
-      
+    unmounted(){
+      //audio
+      this.getDataAudio.pause()
     },
     computed:{
       getNumberIndexSlider(){
@@ -60,10 +78,12 @@ let sliders=[anime1,anime2,anime3];
       },
       getNameApp(){
         return this.debeh.appName
+      },
+      getDataAudio(){
+        const randomize=Math.ceil(Math.random()* this.themes.length-1)
+        const audio=this.audio(this.themes[randomize])
+        return audio
       }
-    },
-    methods:{
-       
     }
   }
 </script>

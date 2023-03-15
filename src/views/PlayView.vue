@@ -20,6 +20,7 @@ import sprSoundFire from '@/assets/SPR_2_1.mp3'
 import ammoEmpty from '@/assets/empty-gun.mp3'
 import ammofull from '@/assets/reload1.mp3'
 import reload from '@/assets/reload2.mp3'
+import warThemePlay from '@/assets/russian-radio-chatter-and-war-sound-effect.mp3'
 import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import Input from '@/components/atom/Input.vue'
@@ -50,6 +51,7 @@ let formdatas={
        formdata:formdatas,
        coordinateY:0,
        coordinateX:0,
+        audio:(src:string)=>new Audio(src)
       }
     },
     updated(){
@@ -109,6 +111,14 @@ let formdatas={
             target!.style.left=(e.pageX-30)+'px'
             target!.style.opacity=`1`
         })
+          //audio
+         const audio=this.getDataAudio
+                audio.loop=true
+                audio.play()
+    },
+    unmounted(){
+      //audio
+          this.getDataAudio.pause()
     },
     computed:{
       getNumberIndexSlider(){
@@ -123,6 +133,10 @@ let formdatas={
       },
       getNameApp(){
         return this.debeh.appName
+      } ,
+      getDataAudio(){
+        const audio=this.audio(warThemePlay)
+        return audio
       }
     },
     methods:{

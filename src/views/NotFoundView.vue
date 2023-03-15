@@ -3,6 +3,17 @@ import anime1 from '@/assets/anime1.mp4'
 import anime2 from '@/assets/anime2.mp4'
 import anime3 from '@/assets/anime3.mp4'
 import {Debeh} from '@/stores/Debeh'
+import theme1 from '@/assets/theme-game1.mp3'
+import theme2 from '@/assets/theme-game2.mp3'
+import theme3 from '@/assets/theme-game3.mp3'
+import theme4 from '@/assets/theme-game4.mp3'
+import theme5 from '@/assets/theme-game5.mp3'
+import theme6 from '@/assets/theme-game6.mp3'
+import theme7 from '@/assets/theme-game7.mp3'
+import theme8 from '@/assets/theme-game8.mp3'
+import theme9 from '@/assets/theme-game9.mp3'
+import theme10 from '@/assets/theme-game10.mp3'
+import theme11 from '@/assets/theme-game11.mp3'
 </script>
 <script lang="ts">
   export default{
@@ -10,7 +21,9 @@ import {Debeh} from '@/stores/Debeh'
       return {
        message:'not found 404!!!',
        weejiosbg:[anime1,anime2,anime3],
-       debeh:Debeh()
+       debeh:Debeh(),
+       audio:(src:string)=>new Audio(src),
+       themes:[theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10,theme11]
       }
     },
     computed:{
@@ -23,11 +36,21 @@ import {Debeh} from '@/stores/Debeh'
       },
       getNameApp(){
         return this.debeh.appName
+      },
+      getDataAudio(){
+        const randomize=Math.ceil(Math.random()* this.themes.length-1)
+        const audio=this.audio(this.themes[randomize])
+        return audio
       }
     },
-    methods:{
-      
-    }
+    unmounted(){
+      //audio
+      this.getDataAudio.pause()
+    },
+    mounted(){
+      //audio
+      this.getDataAudio.play()
+    },
   }
 </script>
 <template>

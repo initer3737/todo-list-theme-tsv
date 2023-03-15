@@ -5,6 +5,17 @@ import { RouterLink } from 'vue-router'
 import {Debeh} from '@/stores/Debeh'
 import { Http } from '@/services/http';
 import { useToken } from '@/services/token';
+import theme1 from '@/assets/theme-game1.mp3'
+import theme2 from '@/assets/theme-game2.mp3'
+import theme3 from '@/assets/theme-game3.mp3'
+import theme4 from '@/assets/theme-game4.mp3'
+import theme5 from '@/assets/theme-game5.mp3'
+import theme6 from '@/assets/theme-game6.mp3'
+import theme7 from '@/assets/theme-game7.mp3'
+import theme8 from '@/assets/theme-game8.mp3'
+import theme9 from '@/assets/theme-game9.mp3'
+import theme10 from '@/assets/theme-game10.mp3'
+import theme11 from '@/assets/theme-game11.mp3'
 </script>
 <script lang="ts">
  
@@ -30,13 +41,23 @@ import { useToken } from '@/services/token';
               password_confirm:''
             }
        }
-      }
+      },
+       audio:(src:string)=>new Audio(src),
+       themes:[theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10,theme11]
     }
+    },
+    unmounted(){
+      //audio
+      this.getDataAudio.pause()
     },
     mounted(){
       if( !this.Token.checkTokenIsEmpty() ){
           this.$router.push('/menu')
       }
+      //audio
+      const audio=this.getDataAudio
+        audio.loop=true 
+        audio.play()
     },
     computed:{
       getUsername(){
@@ -47,6 +68,11 @@ import { useToken } from '@/services/token';
       },
       getNameApp(){
         return this.debeh.appName
+      },
+      getDataAudio(){
+        const randomize=Math.ceil(Math.random()* this.themes.length-1)
+        const audio=this.audio(this.themes[randomize])
+        return audio
       }
     },
         //method updated() melacak semua state yang mengalami mutasi data
