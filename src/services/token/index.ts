@@ -25,6 +25,11 @@ class Token{
    declare(){
      if(this.checkTokenIsNull() === true )localStorage.setItem(this.tokenName,'')
    }
+
+   clear(){
+       return localStorage.setItem(this.tokenName,'')
+   }
+
    getTokenValue(){
     return this.getToken
    }

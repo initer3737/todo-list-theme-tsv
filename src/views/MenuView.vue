@@ -17,7 +17,7 @@ import {Debeh} from '@/stores/Debeh'
 import Icon from '@/components/atom/Icon.vue'
 import { RouterLink } from 'vue-router'
 import { Http } from '@/services/http'
-
+import { useToken } from '@/services/token';
 </script>
 <script lang="ts">
   export default{
@@ -26,6 +26,7 @@ import { Http } from '@/services/http'
        message:'menu ',
        weejiosbg:[anime1,anime2,anime3],
        debeh:Debeh(),
+       Token:useToken(),
        index:1,
        top3info:{
         data:{username:''}
@@ -37,7 +38,11 @@ import { Http } from '@/services/http'
     mounted(){
         Http.get('/top3/players/info')
         .then(res=>{
-           console.log(res)  
+           console.log(res)
+           if(res.status === 401){
+                  this.Token.clear()
+                  this.$router.push('/loading/login')
+              }  
             this.top3info={...res.data.data} 
         })
         //audio
@@ -69,7 +74,16 @@ import { Http } from '@/services/http'
       }
     },
     methods:{
-      
+      logout(){
+          Http.get('/logout')
+          .then(res=>{
+              console.log('logout response',res)
+              // if(res.status === 200){
+                  this.Token.clear()
+                  this.$router.push('/loading/login')
+              // }
+          })
+      }
     }
   }
 </script>
@@ -94,7 +108,7 @@ import { Http } from '@/services/http'
             settings
       </RouterLink>
      <div class="pl-5 border-solid border-l-[2px] border-[#000]">
-        <button class="text-white hover:text-[dodgerblue] ease-in duration-500">
+        <button class="text-white hover:text-[dodgerblue] ease-in duration-500" @click="logout()">
           <Icon :color="'[white]'" :icon="'power'"/>
         </button>
      </div>

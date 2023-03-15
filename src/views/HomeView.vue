@@ -15,7 +15,7 @@ import theme8 from '@/assets/theme-game8.mp3'
 import theme9 from '@/assets/theme-game9.mp3'
 import theme10 from '@/assets/theme-game10.mp3'
 import theme11 from '@/assets/theme-game11.mp3'
-
+import { Http } from '@/services/http';
 </script>
 <script lang="ts">
   export default{
@@ -28,10 +28,37 @@ import theme11 from '@/assets/theme-game11.mp3'
         Token:useToken(),
         debeh:Debeh(),
        audio:(src:string)=>new Audio(src),
-       themes:[theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10,theme11]
+       themes:[theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10,theme11],
+       errmessage:{
+          data:{
+            message:'',
+            errors:{
+              username:[],
+              password:[],
+            }
+          }
+       },
+       wrongCredentials:{
+          data:{
+            message:''
+          }
+       },
+       succCredentials:{
+          data:{
+            message:''
+          }
+       }
       }
     },
-    updated(){},
+    updated(){
+      setTimeout(()=>{
+        this.errmessage.data.message=''
+        this.errmessage.data.errors.username.length=0
+        this.errmessage.data.errors.password.length=0
+        this.wrongCredentials.data.message=''
+        this.succCredentials.data.message=''
+      },4000)
+    },
     created(){},
     mounted(){
       this.Token.declare()
@@ -67,6 +94,23 @@ import theme11 from '@/assets/theme-game11.mp3'
       onChange(e: Event){
           const target=(<HTMLInputElement>e.target)
             this.formdata={...this.formdata,[target.id]:target.value}
+      },
+      login(){
+        Http.post('/login',this.formdata)
+        .then((res)=>{
+            console.log('res 200 respnse',res.data.token)
+            if(res.data.status == 403){
+                  this.wrongCredentials=res
+            }
+            this.succCredentials=res
+            this.Token.createToken(res.data.token)
+            setTimeout(()=>{
+                this.$router.push('/loading/menu')
+            },4000)
+        }).catch(({response})=>{
+            console.log('err response will be',response)
+            this.errmessage=response
+        })
       }
     }
   }
@@ -81,9 +125,15 @@ import theme11 from '@/assets/theme-game11.mp3'
       menuju game menu
     </RouterLink>
   </div>
+<form method="post" @submit.prevent="login()">
     <div class="forms-data bg-[dodgerblue]/50 p-3 rounded">
+      <h3 class="err-msg" v-show="errmessage.data.message.length > 1">{{errmessage.data.message}}</h3>
+      <h3 class="succ-msg" v-show="succCredentials.data.message.length > 1">{{succCredentials.data.message}}</h3>
+        <h3 class="err-msg" v-show="wrongCredentials.data.message.length > 1">{{wrongCredentials.data.message}}</h3>
         <Input  :onChange="onChange" :placeholder="'username'" :id="'username'" label="username"/>
+        <h3 class="err-msg" v-show="errmessage.data.errors.username" v-for="err in errmessage.data.errors.username">{{err}}</h3>
         <Input  :onChange="onChange" :placeholder="'password'" :id="'password'" label="password" type="password"/>
+        <h3 class="err-msg" v-show="errmessage.data.errors.password" v-for="err in errmessage.data.errors.password">{{err}}</h3>
         <button @click="">login</button>
         <div class="flex gap-3 justify-around">
           <RouterLink :to="'/loading/register'" class="text-white hover:text-[blue] ease-in duration-500 underline">
@@ -94,6 +144,7 @@ import theme11 from '@/assets/theme-game11.mp3'
           </RouterLink>
         </div>
     </div>
+</form>
 </template>
 <style scoped>
 .link-container{
