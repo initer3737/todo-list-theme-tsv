@@ -31,6 +31,9 @@ const router = createRouter({
       path: '/play',name: 'play',component:()=>import('../views/PlayView.vue'),meta:{title:'gameplay',auth:true}
     },
     {
+      path: '/story',name: 'story',component:()=>import('../views/StoryView.vue'),meta:{title:'story',auth:true}
+    },
+    {
       path: '/setting',name: 'setting',component:()=>import('../views/SettingView.vue'),meta:{title:'user setting',auth:true}
     },
     {

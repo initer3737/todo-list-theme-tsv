@@ -2,7 +2,7 @@ import { ref, computed ,reactive} from 'vue'
 import { defineStore } from 'pinia'
 import { Http } from '@/services/http'
 import { mount } from '@vue/test-utils'
-
+import story from './story'
 export const Debeh = defineStore('debeh', () => {
   const debehApp={
     name:'TERRORIST HUNTERS'
@@ -30,5 +30,5 @@ export const Debeh = defineStore('debeh', () => {
       return userSession
   }
   const getAvatar='http://localhost:8000/storage/avatar/'
-  return { appName ,fetchSession,getSession,getAvatar}
+  return { appName ,fetchSession,getSession,getAvatar,story}
 })

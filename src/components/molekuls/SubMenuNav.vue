@@ -34,6 +34,9 @@ import { Debeh } from '@/stores/Debeh';
       <RouterLink :to="'/loading/kreditlist'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
            <Icon :color="'[#fff]'" :icon="'list-stars'"/>
       </RouterLink>
+      <RouterLink :to="'/loading/story'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
+           <Icon :color="'[#fff]'" :icon="'pencil-square'"/>
+      </RouterLink>
       <RouterLink :to="'/loading/setting'" class="text-white hover:text-[dodgerblue] ease-in duration-500  border-solid border-r-[2px] border-[#000] border-2 border-white w-[15px] m-4 rounded flex justify-center hover:border-[dodgerblue]">
            <Icon :color="'[#fff]'" :icon="'gear-fill'"/>
       </RouterLink>
