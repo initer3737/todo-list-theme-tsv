@@ -32,7 +32,8 @@ import { useToken } from '@/services/token';
         data:{username:''}
        },
        audio:(src:string)=>new Audio(src),
-       themes:[theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10,theme11]
+       themes:[theme1,theme2,theme3,theme4,theme5,theme6,theme7,theme8,theme9,theme10,theme11],
+       isLogout:false
       }
     },
     mounted(){
@@ -108,7 +109,7 @@ import { useToken } from '@/services/token';
             settings
       </RouterLink>
      <div class="pl-5 border-solid border-l-[2px] border-[#000]">
-        <button class="text-white hover:text-[dodgerblue] ease-in duration-500" @click="logout()">
+        <button class="text-white hover:text-[dodgerblue] ease-in duration-500" @click="isLogout=true">
           <Icon :color="'[white]'" :icon="'power'"/>
         </button>
      </div>
@@ -116,6 +117,13 @@ import { useToken } from '@/services/token';
   <video :src="getWeejioBegeh" loop muted autoplay class="bg-weejio"></video>
   <div>
     <h1 class="app-name bg-[dodgerblue]/50 p-3 rounded">{{ getNameApp }}</h1>
+  </div>
+  <div :class="`logout-confirm ${isLogout === true?'opacity-define':'opacity-undefine'}`">
+      <h1 class="text-xl">yakin mau logout</h1>
+      <div class="flex gap-3 justify-center">
+          <button @click="logout()">ya</button>
+          <button @click="isLogout=false">tidak</button>
+      </div>
   </div>
   <div class="top3-container">
       <h1>top 3 kombatans</h1>
@@ -125,6 +133,23 @@ import { useToken } from '@/services/token';
   </div>
 </template>
 <style scoped>
+.logout-confirm button:hover{
+  color: blue;
+}
+.logout-confirm{
+  padding: 15px;
+  position: absolute;
+  top: 20%;
+  right: 50%;
+  /* backdrop-filter: blur(10px); */
+  color: #fff;
+  box-shadow: 1px 1px 12px 2px white;
+  font-size: 21px;
+  background:linear-gradient(45deg,rgba(0, 0, 0,1) 10%,rgba(0, 81, 128, 0.5),rgba(0, 0, 0,1)) ;
+  animation: kelip-form 1s infinite alternate;
+  cursor: default;
+  border-radius: 6px;
+}
 .top3-container{
   padding: 15px;
   position: absolute;
